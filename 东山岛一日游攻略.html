@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>东山岛一日自驾游攻略（漳州）</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='10' cy='16' r='6' fill='%232E90C4'/%3E%3Ccircle cx='22' cy='16' r='6' fill='%23FF9D6C'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap">
+<link rel="stylesheet" href="assets/leaflet.css">
+<style>
+:root{
+  --sea:#2E90C4; --sea-deep:#1B6E9E; --sea-light:#E8F4FA;
+  --sand:#FFFDF7; --sunset:#FF9D6C; --sunset-deep:#E97A3F;
+  --ink:#1F2329; --sub:#646A73; --line:#DEE3E8;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:"Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--sand);line-height:1.7}
+img{max-width:100%;display:block}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+
+/* Hero */
+.hero{position:relative;min-height:340px;display:flex;align-items:flex-end;background:linear-gradient(180deg,rgba(27,110,158,.15) 0%,rgba(20,45,66,.78) 100%),url('assets/namenwan.jpg') center/cover no-repeat;color:#fff;padding:80px 0 34px}
+.hero .wrap{position:relative;z-index:1}
+.hero h1{font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:1px}
+.hero .sub{margin-top:8px;font-size:15px;opacity:.92}
+.hero .tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+.hero .tag{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(4px);padding:3px 12px;border-radius:999px;font-size:12.5px}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(255,253,247,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;gap:4px;overflow-x:auto;padding:10px 20px}
+nav a{color:var(--sea-deep);text-decoration:none;font-size:13.5px;font-weight:500;padding:4px 10px;border-radius:6px;white-space:nowrap;transition:background .15s}
+nav a:hover{background:var(--sea-light)}
+
+/* Sections */
+section{padding:44px 0 8px}
+.sec-tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--sea-deep);margin-bottom:6px}
+h2.sec-title{font-size:26px;font-weight:900;margin-bottom:6px}
+.sec-desc{color:var(--sub);font-size:14px;margin-bottom:22px}
+
+/* Cards / info grid */
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:26px}
+.info-card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.info-card .k{font-size:12px;color:var(--sub);font-weight:500}
+.info-card .v{font-size:14px;font-weight:700;margin-top:3px}
+.info-card .v small{font-weight:400;color:var(--sub);display:block;font-size:12px}
+
+/* Map */
+.map-box{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:18px}
+#map{height:430px;width:100%}
+.map-legend{background:#fff;padding:8px 12px;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.22);font-size:12.5px;line-height:1.8;color:var(--ink)}
+.map-legend .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+.map-legend .a{background:var(--sea)}.map-legend .b{background:var(--sunset)}
+.map-note{font-size:12.5px;color:var(--sub);margin:10px 2px 0}
+
+/* Timeline */
+.tl{display:grid;grid-template-columns:96px 22px 1fr;gap:0;margin:6px 0 30px}
+.tl .time{text-align:right;font-weight:700;font-size:13.5px;padding:10px 10px 10px 0;color:var(--sea-deep)}
+.tl .axis{position:relative;display:flex;justify-content:center}
+.tl .axis::before{content:"";position:absolute;top:0;bottom:0;width:2px;background:var(--line)}
+.tl .axis .dot{position:relative;top:14px;width:12px;height:12px;border-radius:50%;background:var(--sea);border:2.5px solid #fff;box-shadow:0 0 0 2px var(--sea)}
+.tl .axis .dot.b{background:var(--sunset);box-shadow:0 0 0 2px var(--sunset)}
+.tl .body{padding:8px 0 8px 14px;border-bottom:1px dashed var(--line)}
+.tl .body b{font-size:14.5px}
+.tl .body p{font-size:12.5px;color:var(--sub);margin-top:2px}
+
+/* Spot blocks */
+.spot{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 22px 18px;margin-bottom:22px;box-shadow:0 2px 10px rgba(30,60,80,.05)}
+.spot-head{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:4px}
+.badge{display:inline-block;border-radius:6px;padding:2px 9px;font-size:12px;font-weight:700}
+.badge.a{background:var(--sea);color:#fff}
+.badge.b{background:var(--sunset);color:#fff}
+.spot h3{font-size:19px;font-weight:900;flex:1;min-width:220px}
+.spot .timechip{background:var(--sea-light);color:var(--sea-deep);font-size:12.5px;font-weight:700;border-radius:999px;padding:3px 12px}
+.spot .lead{color:var(--sub);font-size:13.5px;margin:8px 0 4px}
+.spot .navline{background:var(--sea-light);border-radius:8px;padding:9px 12px;font-size:13px;margin:10px 0 14px}
+.spot .navline b{color:var(--sea-deep)}
+table{width:100%;table-layout:fixed;border-collapse:collapse;margin:10px 0 14px;font-size:13.5px}
+table th{background:#F2F4F6;text-align:left;font-weight:700;padding:8px 10px;border:1px solid var(--line)}
+table td{padding:8px 10px;border:1px solid var(--line);vertical-align:top}
+table tr:nth-child(even) td{background:#FAFBFC}
+.col-step{width:12%}.col-do{width:62%}.col-time{width:26%}
+.notes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.note{background:var(--sand);border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:13px}
+.note b{color:var(--sea-deep)}
+.note.orange b{color:var(--sunset-deep)}
+.spot img{width:100%;border-radius:10px;margin:12px 0 4px;object-fit:cover}
+.imgcap{font-size:12px;color:var(--sub);text-align:center;margin-bottom:6px}
+.vidline{font-size:13px;color:var(--sub);margin-top:6px}
+.vidline a{color:var(--sea-deep)}
+
+/* B rules */
+.rulebox{background:#FFF4EC;border:1px solid #F5D9C8;border-radius:10px;padding:14px 16px;font-size:13.5px;margin-bottom:20px}
+.rulebox b{color:var(--sunset-deep)}
+
+/* Backup / verify / video */
+.alt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.alt{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.alt b{color:var(--sea-deep)}
+.alt p{font-size:13px;color:var(--sub);margin-top:4px}
+.vid-list{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 18px;margin-bottom:12px}
+.vid-list b{font-size:14px;color:var(--sea-deep)}
+.vid-list ul{margin:6px 0 0 18px}
+.vid-list li{font-size:13px;margin:4px 0}
+.vid-list a{color:var(--sea-deep);text-decoration:none;word-break:break-all}
+.verify{font-size:13px;color:var(--sub);margin-bottom:6px}
+
+footer{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 34px;color:var(--sub);font-size:12.5px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-between}
+
+@media (max-width:720px){
+  .info-grid{grid-template-columns:1fr 1fr}
+  .notes,.alt-grid{grid-template-columns:1fr}
+  .tl{grid-template-columns:74px 18px 1fr}
+  section{padding:32px 0 4px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>东山岛（漳州）一日自驾游攻略</h1>
+    <p class="sub">2026-09-28（周一）· 2 人自驾 · 潮州出发可晚归 · 全程几乎免门票，9 月开海海鲜正肥</p>
+    <div class="tags">
+      <span class="tag">13:00 出发</span><span class="tag">约 1.5–2h 车程</span><span class="tag">金銮湾日落（约 18:00）</span><span class="tag">20:00 返程</span>
+    </div>
+  </div>
+</header>
+
+<nav>
+  <div class="wrap">
+    <a href="#overview">行程速览</a>
+    <a href="#prepare">行前准备</a>
+    <a href="#itinerary">当日行程</a>
+    <a href="#planB">B 档规则</a>
+    <a href="#backup">备选方案</a>
+    <a href="#videos">视频库</a>
+  </div>
+</nav>
+
+<!-- ===== 视图：行程速览 ===== -->
+<section id="overview">
+  <div class="wrap">
+    <span class="sec-tag">OVERVIEW</span>
+    <h2 class="sec-title">行程速览</h2>
+    <p class="sec-desc">中午饭后从潮州出发，从岛东北的铜陵镇开始一路向南串 4 站：顶街文公祠 → 苏峰山环岛路 → 金銮湾日落 → 铜陵夜市海鲜。蓝色为必去 A 档，橙色为有时间再去的 B 档。</p>
+    <div class="info-grid">
+      <div class="info-card"><div class="k">出发</div><div class="v">13:00 潮州<small>午饭在潮州解决后出发</small></div></div>
+      <div class="info-card"><div class="k">车程</div><div class="v">约 1.5–2h<small>约 110km 高速，高德实测 1h32–1h42</small></div></div>
+      <div class="info-card"><div class="k">天气</div><div class="v">参考 26–32°C<small>9 月末 · 出行前查当日预报</small></div></div>
+      <div class="info-card"><div class="k">日落</div><div class="v">约 18:00<small>随季节变化 · 金銮湾镜面沙滩观日落</small></div></div>
+      <div class="info-card"><div class="k">潮汐</div><div class="v">以当日潮汐表为准<small>双面海·鱼骨沙洲仅适早 6–9 点退潮窗口</small></div></div>
+      <div class="info-card"><div class="k">预算</div><div class="v">约 450–650 元<small>2 人含油费高速、餐饮与机动额度</small></div></div>
+    </div>
+    <div class="map-box">
+      <div id="map"></div>
+    </div>
+    <p class="map-note">地图底图为高德地图瓦片；点击标记可查看地点名称、时间带与亮点。导航：各点导航目的地见下方逐点「导航」行。</p>
+
+    <h3 style="font-size:17px;font-weight:900;margin:22px 0 10px">当日时间线</h3>
+    <div class="tl">
+      <div class="time">13:00</div><div class="axis"><span class="dot"></span></div><div class="body"><b>潮州出发</b><p>导航「南门湾停车场」，约 110km 高速</p></div>
+      <div class="time">14:30</div><div class="axis"><span class="dot"></span></div><div class="body"><b>抵岛 · 停车</b><p>南门湾停车场 10 元/天，步行 3–5 分钟进顶街</p></div>
+      <div class="time">14:50–15:50</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A1 顶街＋文公祠观景台</b><p>大字墙·灯塔·涂鸦巷·左耳天台·南望天台</p></div>
+      <div class="time">15:55–16:25</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A2 南门湾海堤</b><p>《左耳》取景地，彩色民居＋堤坝机位</p></div>
+      <div class="time">16:25–16:50</div><div class="axis"><span class="dot"></span></div><div class="body"><b>转场</b><p>车程约 25 分钟（南门湾 → 苏峰山）</p></div>
+      <div class="time">16:50–17:35</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A3 苏峰山环岛路</b><p>蓝色大桥·观景台·岩雅古村；最晚 17:40 撤</p></div>
+      <div class="time">17:35–17:55</div><div class="axis"><span class="dot"></span></div><div class="body"><b>转场</b><p>车程约 20 分钟（苏峰山 → 金銮湾）</p></div>
+      <div class="time">17:55–18:30</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A4 金銮湾／马銮湾日落</b><p>日落（约 18:00）· 退潮期镜面倒影大概率可见</p></div>
+      <div class="time">18:30–18:50</div><div class="axis"><span class="dot"></span></div><div class="body"><b>转场 · 夜市</b><p>车程约 20 分钟回铜陵镇</p></div>
+      <div class="time">18:50–19:45</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A5 铜陵夜市晚餐</b><p>海鲜排档＋古城老街小吃；最晚 19:50 结束</p></div>
+      <div class="time">20:00</div><div class="axis"><span class="dot"></span></div><div class="body"><b>返程</b><p>约 21:30–22:00 到家</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 视图：行前准备 ===== -->
+<section id="prepare">
+  <div class="wrap">
+    <span class="sec-tag">PREPARE</span>
+    <h2 class="sec-title">行前准备（出发前 1 天核验）</h2>
+    <p class="sec-desc">对照打勾，按 9 月晴日 26–32°C、紫外线 5 级强、傍晚海边风大准备。</p>
+    <div class="spot">
+      <h3 style="font-size:17px;font-weight:900;margin-bottom:8px">出发前携带清单</h3>
+      <table>
+        <colgroup><col style="width:14%"><col style="width:34%"><col style="width:52%"></colgroup>
+        <thead><tr><th>类别</th><th>物品</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="4" style="vertical-align:top"><b>证件设备</b></td><td>身份证＋驾驶证</td><td>自驾必备</td></tr>
+          <tr><td>手机＋车载充电器/数据线</td><td>全程导航耗电快</td></tr>
+          <tr><td>充电宝</td><td>拍照＋骑行一天</td></tr>
+          <tr><td>离线地图</td><td>高德提前缓存潮州→东山岛及岛内各点，防信号弱</td></tr>
+          <tr><td rowspan="4" style="vertical-align:top"><b>防晒装备</b></td><td>防晒霜 SPF50+</td><td>出门前涂，午后补涂一次</td></tr>
+          <tr><td>遮阳帽/渔夫帽</td><td>顶街、海堤无遮阴</td></tr>
+          <tr><td>墨镜</td><td>海边强光</td></tr>
+          <tr><td>冰袖＋防晒衣</td><td>苏峰山骑电驴防晒防风</td></tr>
+          <tr><td rowspan="5" style="vertical-align:top"><b>衣物鞋</b></td><td>短袖 1–2 件</td><td>白天主力</td></tr>
+          <tr><td>薄外套 1 件</td><td>傍晚日落/夜市风大微凉</td></tr>
+          <tr><td>防滑拖鞋或洞洞鞋</td><td>金銮湾沙滩、马銮湾踩水</td></tr>
+          <tr><td>运动鞋</td><td>顶街石阶、苏峰山、步行</td></tr>
+          <tr><td>备用换洗衣物 1 套</td><td>玩水湿身后换</td></tr>
+          <tr><td rowspan="3" style="vertical-align:top"><b>海边装备</b></td><td>手机防水袋</td><td>沙滩玩水、拍镜面倒影</td></tr>
+          <tr><td>毛巾/速干巾</td><td>湿身擦干</td></tr>
+          <tr><td>纸巾/湿巾</td><td>—</td></tr>
+          <tr><td rowspan="5" style="vertical-align:top"><b>药品</b></td><td>肠胃药</td><td>海鲜排档/生腌后防不适</td></tr>
+          <tr><td>晕车药</td><td>备选（山路、夜捕小管乘船可用）</td></tr>
+          <tr><td>创可贴</td><td>礁石沙滩划伤</td></tr>
+          <tr><td>驱蚊液＋风油精</td><td>傍晚海边蚊虫</td></tr>
+          <tr><td>布洛芬</td><td>备选</td></tr>
+          <tr><td rowspan="3" style="vertical-align:top"><b>饮食</b></td><td>大容量水杯或瓶装水 2 瓶/人</td><td>日晒补水</td></tr>
+          <tr><td>少量零食/干粮</td><td>转场路上垫饥</td></tr>
+          <tr><td>薄荷糖/口香糖</td><td>开车提神</td></tr>
+          <tr><td rowspan="6" style="vertical-align:top"><b>车辆杂项</b></td><td>加满油/查续航</td><td>往返约 220km＋岛上行驶</td></tr>
+          <tr><td>玻璃水、行车记录仪确认</td><td>出发前检查</td></tr>
+          <tr><td>手机支架</td><td>车上导航</td></tr>
+          <tr><td>少量现金</td><td>备停车场/小摊用</td></tr>
+          <tr><td>垃圾袋</td><td>沙滩和车内收纳</td></tr>
+          <tr><td>轻便背包</td><td>集中装以上物品，空手逛</td></tr>
+        </tbody>
+      </table>
+      <div class="notes">
+        <div class="note"><b>出发前 10 分钟复查：</b>天气/潮汐核验一次（若加夜游/营地，电话确认今晚营业）；导航设好第一站「南门湾停车场」；车加油充电完成</div>
+      </div>
+    </div>
+    <div class="spot">
+      <h3 style="font-size:17px;font-weight:900;margin-bottom:8px">天气、防晒与装备</h3>
+      <ul style="margin:6px 0 0 20px;font-size:13.5px">
+        <li style="margin:5px 0"><b>防晒优先：</b>紫外线 5 级强，哪怕阴天也要防晒——短袖＋宽檐帽＋墨镜＋防晒霜</li>
+        <li style="margin:5px 0"><b>鞋子：</b>防滑拖鞋（沙滩）＋舒适运动鞋（顶街石阶、苏峰山礁石），别穿高跟鞋</li>
+        <li style="margin:5px 0"><b>其他：</b>充电宝、大容量水杯、手机防水袋、驱蚊液、肠胃药、离线地图或提前缓存导航、少量现金</li>
+        <li style="margin:5px 0"><b>着装：</b>短袖长裤；傍晚海边风大微凉，带一件薄外套</li>
+      </ul>
+      <h3 style="font-size:17px;font-weight:900;margin:16px 0 8px">导航、停车与岛内交通</h3>
+      <ul style="margin:6px 0 0 20px;font-size:13.5px">
+        <li style="margin:5px 0"><b>导航：</b>直接导「南门湾停车场」（铜陵镇），上岛后各点用高德搜「顶街」「苏峰山环岛路」「金銮湾」即可</li>
+        <li style="margin:5px 0"><b>停车：</b>南门湾公共停车场小车 10 元/天</li>
+        <li style="margin:5px 0"><b>岛内移动：</b>苏峰山环岛路旺季白天私家车禁上，租电动车（约 40 元/天）最灵活；不骑车可选景区观光车</li>
+      </ul>
+      <h3 style="font-size:17px;font-weight:900;margin:16px 0 8px">预算分项估算（2 人）</h3>
+      <table>
+        <colgroup><col style="width:22%"><col style="width:20%"><col style="width:58%"></colgroup>
+        <thead><tr><th>分项</th><th>估算金额</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>交通（油费＋高速）</td><td>约 180–260 元</td><td>往返约 220km，含路桥，估算</td></tr>
+          <tr><td>门票</td><td>10 元起</td><td>文公祠观景平台免费（部分私人天台 5–10 元，现场为准）；风动石 45 元/人（线上约 42，可选）</td></tr>
+          <tr><td>岛内交通</td><td>0–40 元</td><td>电驴 40 元/天（1 辆）或观光车</td></tr>
+          <tr><td>餐饮</td><td>约 200–260 元</td><td>顶街小吃＋咖啡约 60–100；海鲜晚餐 120–160</td></tr>
+          <tr><td>停车</td><td>10 元</td><td>南门湾停车场</td></tr>
+          <tr><td>机动（10–15%）</td><td>约 50–80 元</td><td>临时消费与加项</td></tr>
+          <tr><td><b>合计</b></td><td><b>约 450–650 元</b></td><td>含风动石选项与机动额度，估算</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 视图：当日行程 ===== -->
+<section id="itinerary">
+  <div class="wrap">
+    <span class="sec-tag">ITINERARY</span>
+    <h2 class="sec-title">当日行程（按时间顺序）</h2>
+    <p class="sec-desc">A 档为必去主线，B 档只在满足触发条件时插入（规则见下方）。每站含导航、分步玩法（加粗为亮点）、避坑与实景参考。</p>
+
+    <div class="spot">
+      <div class="spot-head"><span class="badge a">A1</span><h3>顶街＋文公祠观景台（左耳·南望天台）</h3><span class="timechip">14:50–15:50 · 约 1 小时</span></div>
+      <p class="lead">东山岛人文精华都在铜陵镇。这条 600 年老街上街是精华段，网红店与打卡点集中，多钻旁边小巷藏着原汁原味老厝。</p>
+      <div class="navline"><b>导航：</b>「南门湾停车场」（官方停车场 10 元/天、30 分钟免费，步行 3–5 分钟即达顶街/海堤；备选「铜陵大市场停车场」首小时 3 元封顶 18 元）。顶街入口在铜陵镇下田街，左耳天台/文公祠在顶街内。</div>
+      <table>
+        <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
+        <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>南门湾停车场 → 步行进顶街</td><td>5 分钟</td></tr>
+          <tr><td>2</td><td>上街精华段：<b>东山岛大字墙</b>、<b>51 号灯塔</b>、<b>涂鸦巷</b></td><td>15 分钟</td></tr>
+          <tr><td>3</td><td>东山图书馆：<b>南洋花砖楼</b>＋一楼文创店（顺路）</td><td>10–15 分钟</td></tr>
+          <tr><td>4</td><td><b>朝圣楼</b>（可选）：登楼眺望渔港与古城全景，门票 15 元</td><td>15 分钟</td></tr>
+          <tr><td>5</td><td>文公祠观景台 → <b>左耳天台</b>（圆柱石墩处）→ <b>南望天台</b>（绿荫小道下去，咖啡屋）</td><td>25–30 分钟</td></tr>
+        </tbody>
+      </table>
+      <img src="assets/dingjie.jpg" alt="顶街天台俯瞰南门湾">
+      <p class="imgcap">顶街文公祠一带天台可俯瞰整个南门湾海岸线</p>
+      <div class="notes">
+        <div class="note"><b>边走边吃：</b>古早小吃、猫仔粥、蚵仔煎、小媳妇甜汤</div>
+        <div class="note orange"><b>避坑：</b>正午到下午 3 点前南门湾海堤较晒，先逛顶街有遮阴；文公祠、南门湾节假日人多，尽量错峰；石阶多穿舒适鞋</div>
+        <div class="note"><b>顺路咖啡歇脚（加分项）：</b>顶街咖啡馆密集——南望天台（顶街 105 号，9:30–21:00，店外与旁边天台免费拍，进店饮品均价 20+ 不限时）；转运咖啡酒馆（顶街 358-2 号，综艺同款，人均约 31 元）；山前月台（半山腰蓝色小屋，近左耳天台）</div>
+        <div class="note"><b>怎么玩：</b>按上表顺序走，全程约 1 小时；中途可随时停下拍照、吃小吃</div>
+      </div>
+      <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7668742081066064730">抖音·南望天台带路（导航搜不到）</a> · <a href="https://www.iesdouyin.com/share/video/7664902541587864817">抖音·顶街 8 大拍照机位</a> · <a href="https://www.iesdouyin.com/share/video/7672385419732233856">抖音·南门湾/顶街 3 天 2 夜实测</a></p>
+    </div>
+
+    <div class="spot">
+      <div class="spot-head"><span class="badge a">A2</span><h3>南门湾海堤</h3><span class="timechip">15:55–16:25 · 约 30 分钟</span></div>
+      <p class="lead">《左耳》取景地，彩色渔村＋海堤日落是东山岛最出片的画面；本地人实测 15:30–18:30 是体验感最佳时段。</p>
+      <div class="navline"><b>导航：</b>同「南门湾停车场」，无需挪车，步行 5 分钟内到海堤。</div>
+      <table>
+        <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
+        <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>顶街步行 5 分钟到海堤</td><td>5 分钟</td></tr>
+          <tr><td>2</td><td>沿海堤漫步：<b>彩色临海民居</b>＋渔船</td><td>15 分钟</td></tr>
+          <tr><td>3</td><td><b>堤坝机位</b>：电影同款视角拍照</td><td>10 分钟</td></tr>
+        </tbody>
+      </table>
+      <img src="assets/namenwan.jpg" alt="南门湾彩色房子海堤">
+      <p class="imgcap">南门湾海堤旁的彩色临海民居</p>
+      <div class="notes">
+        <div class="note"><b>加分项：</b>落日时分彩色房子配海面随手出片；时间富余可上左耳天台俯瞰海湾</div>
+        <div class="note orange"><b>避坑：</b>海堤无遮阴，防晒别停；南门湾小吃街游客扎堆、口味偏商业化，晚餐不安排在这里</div>
+      </div>
+      <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7672385419732233856">抖音·南门湾/顶街 3 天 2 夜实测</a> · <a href="https://www.iesdouyin.com/share/video/7646997948634647851">抖音·2 天 1 晚精华路线（含南门湾机位）</a></p>
+    </div>
+
+    <div class="spot">
+      <div class="spot-head"><span class="badge a">A3</span><h3>苏峰山环岛路</h3><span class="timechip">16:50–17:35 · 约 45 分钟</span></div>
+      <p class="lead">「福建最美环岛路」之一，一侧青山一侧碧海，蓝色大桥横跨悬崖。日落前 1 小时光线最好，正好是安排的时间。</p>
+      <div class="navline"><b>导航：</b>「苏峰山景区停车场（南侧）」（或北侧）。旺季 8:00–20:00 私家车禁止上山：车停山下停车场（约 15 元/天封顶），换场内租电驴或观光车；环岛路为单行线（南→北），勿逆行。</div>
+      <div class="note" style="margin-bottom:10px"><b>租电驴（就在停车场内，不用另找）：</b>南侧停车场「候车处左侧」即有租赁点——电动车 20 元/2 小时起、超时 10 元/小时、押金 199 元（无损退还），2 小时足够骑完一圈；也可坐观光车 10 元/人（当天往返通票，各观景台随上随下）。备选：南门湾/铜陵镇车行全天租电驴 40–50 元/天（旺季 60–80，续航 50–70km，需骑回原租车点还车）。</div>
+      <table>
+        <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
+        <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>苏峰山停车场（南侧）→ 场内租电驴或乘观光车</td><td>10 分钟</td></tr>
+          <tr><td>2</td><td>上环岛路 → <b>网红蓝色大桥</b>打卡</td><td>10 分钟</td></tr>
+          <tr><td>3</td><td>沿途<b>观景台</b>逐一拍照（海天一色机位）</td><td>15 分钟</td></tr>
+          <tr><td>4</td><td>环岛路中段 → <b>岩雅古村/岩雅恋人</b>（临海石头老房子＋礁石海浪）</td><td>15 分钟</td></tr>
+          <tr><td>5</td><td>拍完原路返回或继续向前（环岛路单行线，勿逆行）</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <img src="assets/sufengshan.jpg" alt="苏峰山环岛路蓝色大桥">
+      <p class="imgcap">苏峰山环岛路网红蓝色大桥</p>
+      <div class="notes">
+        <div class="note"><b>加分项：</b>岩雅村段人少安静，适合拍无人大片</div>
+        <div class="note orange"><b>避坑：</b>旺季白天私家车禁止驶入环岛路；弯道勿随意停车，到指定观景区域停靠；租车前检查电量刹车、骑行戴头盔；最晚 17:40 撤，留足转场时间</div>
+      </div>
+      <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7661223653057096306">抖音·苏峰山环岛骑行</a> · <a href="https://www.iesdouyin.com/share/video/7689040236798624433">抖音·J 人实测（含苏峰山三路线）</a></p>
+    </div>
+
+    <div class="spot">
+      <div class="spot-head"><span class="badge a">A4</span><h3>金銮湾／马銮湾日落</h3><span class="timechip">17:55–18:30 · 约 35 分钟</span></div>
+      <p class="lead">金銮湾沙滩坡度平缓，退潮后像一面镜子倒映天空。出行日若处于退潮期（9 月末参考：午后至傍晚多为退潮），傍晚大概率能看到天空之镜效果。</p>
+      <div class="navline"><b>导航：</b>「金銮湾沙滩停车场」（10 元/天封顶）；马銮湾顺路导航「马銮湾景区停车场」（10 元/天封顶）。苏峰山下山沿环岛路向南即到金銮湾。</div>
+      <table>
+        <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
+        <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>到金銮湾沙滩：等日落（约 18:00）、拍<b>镜面倒影</b></td><td>20 分钟</td></tr>
+          <tr><td>2</td><td>顺路马銮湾踩水（两湾车程约 10 分钟）</td><td>10 分钟</td></tr>
+        </tbody>
+      </table>
+      <img src="assets/jinluanwan.jpg" alt="金銮湾晚霞镜面沙滩">
+      <p class="imgcap">金銮湾退潮后的镜面沙滩与晚霞</p>
+      <div class="notes">
+        <div class="note"><b>加分项：</b>17:55 前到位，别错过日落；低角度拍摄倒影更完整</div>
+        <div class="note orange"><b>避坑：</b>涨潮时看不到镜面效果；马銮湾下海注意海浪变化，不去深水区；沙滩风大，傍晚带薄外套</div>
+      </div>
+      <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7678995714786464891">抖音·保姆级逛吃攻略（机位＋路线图）</a> · <a href="https://www.iesdouyin.com/share/video/7689040236798624433">抖音·J 人实测（含金銮湾日落）</a></p>
+    </div>
+
+    <div class="spot">
+      <div class="spot-head"><span class="badge a">A5</span><h3>铜陵夜市晚餐</h3><span class="timechip">18:50–19:45 · 约 1 小时</span></div>
+      <p class="lead">回铜陵镇（古城老街小吃或夜市排档）。码头周边高价排档溢价偏高，点菜先问价，不盲目选网红店。</p>
+      <div class="navline"><b>导航：</b>「铜陵夜市（东山岛店）」工业路 833 号；摊区在团结路×万祥路一带，19:00 后热闹。夜市停车免费。</div>
+      <table>
+        <colgroup><col style="width:24%"><col style="width:48%"><col style="width:28%"></colgroup>
+        <thead><tr><th>推荐店</th><th>特色与价格</th><th>提示</th></tr></thead>
+        <tbody>
+          <tr><td><b>友仁排档</b></td><td>海鲜池自选、明码标价</td><td>离南门湾近</td></tr>
+          <tr><td><b>呷饭</b></td><td>紫菜炒饭/白灼小管，人均 30–40</td><td>—</td></tr>
+          <tr><td><b>三角点姜母鸭</b></td><td>姜母鸭（全程不加水）</td><td>南门湾分店离海湾约 100 米</td></tr>
+          <tr><td><b>同里沙茶面</b></td><td>20 余种加料自选，人均约 20</td><td>排队王</td></tr>
+          <tr><td><b>乌糖婶甜汤</b></td><td>黑芝麻牛奶冰招牌</td><td>1996 老字号，只开半天、排队多</td></tr>
+          <tr><td><b>林记铜山鸡腿</b></td><td>9.9 元蒜香炸鸡腿</td><td>—</td></tr>
+          <tr><td><b>方记烤吧</b></td><td>手工炭火烧烤</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <img src="assets/yexi.jpg" alt="东山岛海边海鲜晚餐">
+      <p class="imgcap">铜陵夜市的海鲜排档晚餐</p>
+      <div class="notes">
+        <div class="note"><b>怎么吃：</b>推荐店见上表，丰俭由人；甜汤/鸡腿小吃收尾再启程</div>
+        <div class="note orange"><b>避坑：</b>海鲜排档点菜先问价、看清称重；晚餐最晚 19:50 结束，20:00 启程返潮州</div>
+      </div>
+      <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7656423289862923387">抖音·黄金一日路线＋必吃</a> · <a href="https://www.iesdouyin.com/share/video/7678995714786464891">抖音·保姆级逛吃攻略（美食）</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 视图：B档规则与详情 ===== -->
+<section id="planB">
+  <div class="wrap">
+    <span class="sec-tag">PLAN B</span>
+    <h2 class="sec-title">B 档备选：什么时候去、插在哪</h2>
+    <p class="sec-desc">B 档只在不影响日落（时间随季节变化）与 20:00 返程时插入；每个点都给了触发条件与衔接位置，超时就按「顶街→南门湾→马銮湾」顺序压缩。</p>
+    <div class="rulebox">
+      <b>总原则：</b>A 档主线优先。B 档只在「当前时间点已提前完成主线」时插入；任何一个 B 档点若导致赶不上金銮湾日落或夜市晚餐（最晚 19:50 结束），直接放弃。
+    </div>
+
+    <div class="spot">
+      <div class="spot-head"><span class="badge b">B1</span><h3>风动石景区</h3><span class="timechip">触发：14:50 前逛完顶街或 13:30 前上岛</span></div>
+      <p class="lead">「天下第一奇石」——高 4.37m、宽 4.57m、重约 200 吨，风吹能动却 600 年不倒；景区含铜山古城、关帝庙、虎崆滴玉。</p>
+      <div class="navline"><b>导航：</b>「风动石景区停车场」（西门进，停车约 15 元/天，配充电桩）。门票 45 元/人（线上约 42），夏季 7:00–18:30、17:30 停止检票。<b>衔接位置：</b>插在顶街之后、南门湾之前；15:30 后未到放弃。</div>
+      <table>
+        <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
+        <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>西门进 → <b>铜山古城墙</b>登高眺望海湾</td><td>15 分钟</td></tr>
+          <tr><td>2</td><td>黄道周纪念馆</td><td>10 分钟</td></tr>
+          <tr><td>3</td><td>打卡<b>风动石</b>（侧面低角度拍照最出片，严禁攀爬推石）</td><td>15 分钟</td></tr>
+          <tr><td>4</td><td><b>东山关帝庙</b>（剪瓷雕精美，可摸「平安石」）</td><td>15 分钟</td></tr>
+          <tr><td>5</td><td>滨海悬崖木栈道 → <b>虎崆滴玉</b>海蚀石洞</td><td>25 分钟</td></tr>
+          <tr><td>6</td><td>东门出（南门出即南门湾，步行约 10 分钟衔接）</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <img src="assets/fengdongshi.jpg" alt="东山风动石">
+      <p class="imgcap">坐落在海滨石崖上的东山风动石</p>
+      <div class="notes">
+        <div class="note"><b>加分项：</b>下午 3 点后游客少；内部电瓶车没必要，步行即可</div>
+        <div class="note orange"><b>避坑：</b>景区门口纪念品偏贵，去铜陵老街买；东门屿需另购票+轮渡（约半小时一班），时间紧直接跳过；17:30 停止检票，别卡点进</div>
+      </div>
+      <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7573871546110158009">抖音·风动石景区云游（铜山古城文化）</a></p>
+    </div>
+
+    <div class="spot">
+      <div class="spot-head"><span class="badge b">B2</span><h3>彩蝶湾</h3><span class="timechip">触发：18:20 前完成金銮湾日落＋马銮湾</span></div>
+      <p class="lead">多巴胺色彩的童话世界——七彩漫道、橙色海景小火车、玻璃秋千阵、天空之门，随手一拍都是文艺大片。</p>
+      <div class="navline"><b>导航：</b>「彩蝶湾景区」（康美镇）。<b>衔接位置：</b>插在金銮湾之后、夜市之前；19:10 必须撤离去夜市。</div>
+      <table>
+        <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
+        <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><b>七彩漫道/彩虹公路</b>拍照</td><td>15 分钟</td></tr>
+          <tr><td>2</td><td><b>网红小火车</b>（30 元/人，坐最后一排拍「追海浪」）</td><td>20 分钟</td></tr>
+          <tr><td>3</td><td><b>玻璃秋千阵</b>（涨潮时拍像漂在海上）</td><td>15 分钟</td></tr>
+          <tr><td>4</td><td><b>天空之门</b>（纯白建筑＋海天镜面倒影）</td><td>10 分钟</td></tr>
+        </tbody>
+      </table>
+      <img src="assets/caidiewan.jpg" alt="彩蝶湾彩虹步道与小火车">
+      <p class="imgcap">彩蝶湾七彩漫道与海景小火车</p>
+      <div class="notes">
+        <div class="note"><b>加分项：</b>上午 9 点前坐小火车人最少（午后前往，人略多但可接受）</div>
+        <div class="note orange"><b>避坑：</b>海边风大注意保暖防晒；礁石/沙滩穿防滑拖鞋或运动鞋</div>
+      </div>
+      <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7344733957067476261">抖音·东山自驾游攻略（马銮湾/彩蝶湾/双面海站）</a></p>
+    </div>
+
+    <div class="spot">
+      <div class="spot-head"><span class="badge b">B3</span><h3>澳角村＋乌礁湾</h3><span class="timechip">触发：默认不去，会牺牲日落</span></div>
+      <p class="lead">东山岛最渔村的角落：最美风车环海公路（约 8.8km）、断桥、天涯澳角悬崖、退潮海底溶洞，傍晚正好看渔船归港。</p>
+      <div class="navline"><b>导航：</b>先「乌礁湾广场」→ 再「澳角村/天涯澳角」。<b>衔接位置：</b>插在苏峰山之后、金銮湾日落之前，与日落二选一——去澳角就基本看不到镜面日落。</div>
+      <table>
+        <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
+        <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>铜陵镇出发 → <b>乌礁湾风车公路</b>（官方名「东山生态环岛路乌礁湾段」约 8.8km）</td><td>车程约 30 分钟</td></tr>
+          <tr><td>2</td><td>风车公路拍照 → <b>断桥</b>打卡</td><td>30 分钟</td></tr>
+          <tr><td>3</td><td>澳角村：<b>天涯澳角悬崖</b>、观景台俯瞰渔村</td><td>40 分钟</td></tr>
+          <tr><td>4</td><td>退潮<b>海底溶洞</b>（卡退潮、结伴）</td><td>20 分钟</td></tr>
+          <tr><td>5</td><td>傍晚看<b>渔船归港</b></td><td>20 分钟</td></tr>
+        </tbody>
+      </table>
+      <img src="assets/wujiaowan.jpg" alt="乌礁湾风车公路">
+      <p class="imgcap">乌礁湾风车环海公路</p>
+      <div class="notes">
+        <div class="note"><b>交通：</b>电驴全程约 35km（选高续航车型）或自驾；公交有直达专线但班次少；节假日南部叫车难</div>
+        <div class="note orange"><b>避坑：</b>礁石湿滑必须防滑鞋并结伴；溶洞要卡退潮；电驴电量要够；去澳角=放弃金銮湾镜面日落，二选一</div>
+      </div>
+      <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7654876325749376505">抖音·澳角渔村小众攻略（免门票）</a> · <a href="https://www.iesdouyin.com/share/video/7676032501094000121">抖音·五刷东山·澳角乌礁湾灯塔断桥</a> · <a href="https://www.iesdouyin.com/share/video/7503867098389646650">抖音·天涯澳角攻略（海底溶洞）</a></p>
+    </div>
+
+    <div class="spot">
+      <div class="spot-head"><span class="badge b">B4</span><h3>南屿双面海／岐下村鱼骨沙洲</h3><span class="timechip">触发：仅适合早 6–9 点退潮窗口，本行程不安排</span></div>
+      <p class="lead">中午出发、潮汐窗口不对，这两个点确定不去；留作清晨出发方案（按下方节奏走，全程约半天）。</p>
+      <div class="navline"><b>导航：</b>「南屿」（铜陵镇西南近海）→「岐下村」（鱼骨沙洲乘船点）。<b>衔接位置：</b>不参与本行程；如未来清晨出行，金銮湾日出 → 南屿 → 岐下村一条线顺路。</div>
+      <table>
+        <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
+        <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>金銮湾看日出（<b>镜面沙滩</b>）</td><td>30 分钟</td></tr>
+          <tr><td>2</td><td>南屿双面海：退潮现<b>海上小路</b>＋<b>灯塔</b>（《你的婚礼》取景地，涨潮前撤）</td><td>40 分钟</td></tr>
+          <tr><td>3</td><td>岐下村<b>鱼骨沙洲</b>：乘船上沙洲（船票约 80–120 元，航拍才震撼）</td><td>40 分钟</td></tr>
+        </tbody>
+      </table>
+      <div class="notes">
+        <div class="note"><b>加分项：</b>南屿退潮时海上小路通往灯塔，电影同款画面；沙洲航拍俯视鱼骨形状</div>
+        <div class="note orange"><b>避坑：</b>涨潮禁登岛、勿在沙洲逗留到潮水上涨；鱼骨沙洲风大易晕船（备晕船药）；手机拍摄效果普通</div>
+      </div>
+      <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7344733957067476261">抖音·自驾游（含双面海退潮）</a> · <a href="https://www.iesdouyin.com/share/video/7353105831581191435">抖音·3 天 2 晚（含鱼骨沙洲）</a> · <a href="https://www.iesdouyin.com/share/video/7690199996554414547">抖音·潮汐核验示例</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 视图：备选方案 ===== -->
+<section id="backup">
+  <div class="wrap">
+    <span class="sec-tag">BACKUP</span>
+    <h2 class="sec-title">备选方案</h2>
+    <p class="sec-desc">弹性兜底：怎么压缩、怎么加项、天气不对怎么办。</p>
+    <div class="alt-grid">
+      <div class="alt"><b>超时压缩顺序</b><p>任何环节超时，按「顶街 → 南门湾 → 马銮湾」逐级压缩；再不够，苏峰山限 40 分钟、夜市晚餐缩短。</p></div>
+      <div class="alt"><b>加项组合</b><p>顶街逛得快 + 时间提前：加风动石（B1）；日落前有富余：加彩蝶湾（B2）；苏峰山后仍早：澳角二选一（B3）。</p></div>
+      <div class="alt"><b>下次清晨方案</b><p>金銮湾日出 → 南屿双面海 → 岐下村鱼骨沙洲，全程约半天，需 5:30 前从潮州出发。</p></div>
+      <div class="alt"><b>雨天/高温兜底</b><p>改走室内线：风动石景区、朝圣楼、顶街咖啡馆、铜陵老街小吃、关帝庙；或整体顺延一周。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 视图：信息核验 ===== -->
+<section id="verify">
+  <div class="wrap">
+    <span class="sec-tag">VERIFY</span>
+    <h2 class="sec-title">信息核验提示（核验于 2026 年 9 月）</h2>
+    <div class="verify">天气：出行当日以预报为准（9 月末参考：晴 26–32°C，紫外线强）。（来源：抖音天气核验示例帖）</div>
+    <div class="verify">潮汐：出行当日以潮汐表为准（双面海/鱼骨沙洲仅适早 6–9 点退潮窗口）。（来源：抖音潮汐核验示例帖）</div>
+    <div class="verify">车程：潮州 → 东山岛约 110km，高德实测 1h32–1h42；岛内点间转场时间见时间线。</div>
+    <div class="verify">票价与营业时间：风动石 45 元（线上约 42）、朝圣楼 15 元、小火车 30 元、电驴 20 元/2h 等，均为平台当前公开信息，出行前 1 天请再复查一次。</div>
+    <div class="verify">地图坐标：部分地点坐标为估算值，仅用于行程示意，导航以各点「导航」行为准。</div>
+    <div class="verify">视频链接：均为抖音平台公开分享页；实景图片来自公开网络并保留水印来源。</div>
+  </div>
+</section>
+
+<!-- ===== 视图：视频库 ===== -->
+<section id="videos">
+  <div class="wrap">
+    <span class="sec-tag">VIDEOS</span>
+    <h2 class="sec-title">实景视频参考库（抖音原帖）</h2>
+    <p class="sec-desc">按地点分组，出发前挑 2–3 条看即可建立实景预期。</p>
+    <div class="vid-list"><b>顶街 · 南门湾 · 天台</b>
+      <ul>
+        <li><a href="https://www.iesdouyin.com/share/video/7672385419732233856">东山 3 天 2 夜实测（顶街/南门湾）</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7656423289862923387">黄金一日路线＋必吃</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7689040236798624433">J 人实测·三条路线怎么选</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7668742081066064730">南望天台带路（导航搜不到版）</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7671250638738918888">南望天台：消费 20+ 不限时</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7673467068025939121">左耳天台第二条路线</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7664902541587864817">顶街 8 大拍照机位</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7678995714786464891">保姆级逛吃攻略（机位＋路线图）</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7673422410711928098">顶街咖啡合集</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7688546709337413440">懒人版（卤面珍地址等）</a></li>
+      </ul>
+    </div>
+    <div class="vid-list"><b>苏峰山</b>
+      <ul>
+        <li><a href="https://www.iesdouyin.com/share/video/7661223653057096306">苏峰山环岛骑行实测</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7677152839604473134">租电驴 40 元 vlog</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7412980854756068644">苏峰山停车/接驳/租车</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7645860387539209510">苏峰山环岛路怎么玩</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7268871025322953996">苏峰山环岛路（岩雅村段）</a></li>
+      </ul>
+    </div>
+    <div class="vid-list"><b>风动石 · 彩蝶湾 · 澳角 · 双面海/沙洲</b>
+      <ul>
+        <li><a href="https://www.iesdouyin.com/share/video/7573871546110158009">风动石景区云游（铜山古城文化）</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7344733957067476261">东山自驾游（马銮湾/彩蝶湾/双面海）</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7654876325749376505">澳角渔村小众攻略（免门票）</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7676032501094000121">澳角乌礁湾·灯塔断桥</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7503867098389646650">天涯澳角·海底溶洞</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7353105831581191435">3 天 2 晚小众路线（含鱼骨沙洲/西浦湾）</a></li>
+      </ul>
+    </div>
+    <div class="vid-list"><b>时效与停车</b>
+      <ul>
+        <li><a href="https://www.iesdouyin.com/share/video/7690199996554414547">潮汐核验示例</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7690258690947557553">天气核验示例</a></li>
+        <li><a href="https://www.iesdouyin.com/share/video/7689870870383506304">南门湾停车攻略</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>东山岛一日游攻略 · 2026-09-28</span>
+    <span>信息核验于 2026 年 9 月 · 实景图/视频来源见各点标注</span>
+  </div>
+</footer>
+
+<script src="assets/leaflet.js"></script>
+<script>
+(function(){
+  if (typeof L === 'undefined') return;
+  var map = L.map('map', {scrollWheelZoom:false}).setView([23.68,117.50], 11);
+  L.tileLayer('https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=7&x={x}&y={y}&z={z}', {
+    maxZoom: 18,
+    subdomains: ['1','2','3','4'],
+    attribution: '&copy; 高德地图'
+  }).addTo(map);
+
+  var spots = [
+    {n:'A5 铜陵夜市/古城', c:[23.740,117.522], t:'18:50–19:45', d:'海鲜排档＋老街小吃', a:true},
+    {n:'A1 顶街·文公祠天台', c:[23.734,117.528], t:'14:50–15:50', d:'左耳天台·南望天台·涂鸦巷', a:true},
+    {n:'A2 南门湾海堤', c:[23.735,117.523], t:'15:55–16:25', d:'《左耳》彩色海堤', a:true},
+    {n:'A3 苏峰山环岛路', c:[23.660,117.485], t:'16:50–17:35', d:'蓝色大桥·岩雅古村', a:true},
+    {n:'A4 金銮湾/马銮湾', c:[23.696,117.475], t:'17:55–18:30', d:'镜面日落', a:true},
+    {n:'B1 风动石景区', c:[23.731,117.530], t:'顶街后·15:30 前', d:'天下第一奇石', a:false},
+    {n:'B2 彩蝶湾', c:[23.708,117.483], t:'日落+马銮湾后', d:'彩虹漫道·小火车', a:false},
+    {n:'B3 澳角村/乌礁湾', c:[23.587,117.433], t:'苏峰山后·二选一', d:'风车公路·断桥', a:false},
+    {n:'B4 南屿双面海', c:[23.725,117.521], t:'仅早 6–9 点', d:'退潮海上小路·灯塔', a:false},
+    {n:'B4 岐下村鱼骨沙洲', c:[23.605,117.345], t:'仅早 6–9 点', d:'船 80–120 元·航拍', a:false}
+  ];
+  spots.forEach(function(s){
+    var color = s.a ? '#2E90C4' : '#FF9D6C';
+    var ic = L.divIcon({className:'', html:'<div style="width:13px;height:13px;border-radius:50%;background:'+color+';border:2.5px solid #fff;box-shadow:0 0 0 2px '+color+',0 1px 4px rgba(0,0,0,.3)"></div>', iconSize:[13,13], iconAnchor:[7,7]});
+    L.marker(s.c, {icon:ic}).addTo(map)
+      .bindPopup('<b>'+s.n+'</b><br><span style="color:#646A73;font-size:12px">'+s.t+'</span><br>'+s.d);
+  });
+  var legend = L.control({position:'bottomleft'});
+  legend.onAdd = function(){
+    var div = L.DomUtil.create('div','map-legend');
+    div.innerHTML = '<span class="dot a"></span>A 档必去（蓝）<br><span class="dot b"></span>B 档备选（橙）';
+    return div;
+  };
+  legend.addTo(map);
+})();
+</script>
+</body>
+</html>
+</body>
+</html>
