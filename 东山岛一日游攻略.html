@@ -96,13 +96,15 @@ table tr:nth-child(even) td{background:#FAFBFC}
 .rulebox b{color:var(--sunset-deep)}
 
 /* Foldable details */
-details.dtl{margin-top:10px}
-details.dtl summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--sea-deep);background:var(--sea-light);padding:8px 12px;border-radius:8px;list-style:none;outline:none;user-select:none}
+details.dtl{margin-top:12px}
+details.dtl summary{cursor:pointer;font-size:13.5px;font-weight:700;color:#fff;background:var(--sea);padding:10px 16px;border-radius:999px;list-style:none;outline:none;user-select:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 2px 6px rgba(46,144,196,.3);transition:transform .12s, box-shadow .12s}
 details.dtl summary::-webkit-details-marker{display:none}
-details.dtl summary::before{content:"▸ ";color:var(--sea-deep)}
-details.dtl[open] summary::before{content:"▾ "}
-details.dtl[open] summary{margin-bottom:12px}
-details.dtl summary:hover{background:#DCEEF7}
+details.dtl summary::before{content:"";width:0;height:0;border-left:6px solid #fff;border-top:4px solid transparent;border-bottom:4px solid transparent}
+details.dtl summary::after{content:"展开";font-size:12px;font-weight:500;opacity:.9;border:1px solid rgba(255,255,255,.55);padding:1px 9px;border-radius:999px}
+details.dtl summary:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(46,144,196,.45)}
+details.dtl[open] summary{background:var(--sea-deep);margin-bottom:14px}
+details.dtl[open] summary::before{border-left:none;border-top:6px solid #fff;border-right:4px solid transparent;border-left:4px solid transparent}
+details.dtl[open] summary::after{content:"收起"}
 
 /* Backup / verify / video */
 .alt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
