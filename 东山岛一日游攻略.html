@@ -127,6 +127,20 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
   .tl{grid-template-columns:74px 18px 1fr}
   section{padding:32px 0 4px}
 }
+
+/* Nav button + modal */
+.navbtn{margin-left:10px;background:#fff;color:var(--sea);border:1.5px solid var(--sea);padding:4px 12px;border-radius:999px;font-size:12.5px;font-weight:700;cursor:pointer;transition:all .15s;vertical-align:middle}
+.navbtn:hover{background:var(--sea);color:#fff}
+.navmodal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:999;align-items:center;justify-content:center;padding:20px}
+.navmodal.show{display:flex}
+.navmodal-card{background:#fff;border-radius:16px;padding:22px;max-width:360px;width:100%;box-shadow:0 12px 40px rgba(0,0,0,.2)}
+.navmodal-card h4{margin:0 0 4px;font-size:16px;font-weight:900}
+.navmodal-card .sub{font-size:12.5px;color:#666;margin:0 0 16px}
+.navmodal-card a{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;text-decoration:none;color:#222;font-size:14px;font-weight:600;margin-bottom:6px;transition:background .12s}
+.navmodal-card a:hover{background:#f2f7fb}
+.navmodal-card a .ico{width:28px;height:28px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:900;flex-shrink:0}
+.navmodal-close{margin-top:10px;width:100%;padding:10px;border:none;background:#f2f2f2;border-radius:10px;font-size:13.5px;cursor:pointer;color:#555}
+.navmodal-close:hover{background:#e8e8e8}
 </style>
 </head>
 <body>
@@ -281,7 +295,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     <div class="spot">
       <div class="spot-head"><span class="badge a">A1</span><h3>顶街＋文公祠观景台（左耳·南望天台）</h3><span class="timechip">14:45–15:45 · 约 1 小时</span></div>
       <p class="lead">东山岛人文精华都在铜陵镇。这条 600 年老街上街是精华段，网红店与打卡点集中，多钻旁边小巷藏着原汁原味老厝。</p>
-      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「南门湾停车场」（官方停车场 10 元/天、30 分钟免费，步行 3–5 分钟即达顶街/海堤；备选「铜陵大市场停车场」首小时 3 元封顶 18 元）。顶街入口在铜陵镇下田街，左耳天台/文公祠在顶街内。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「南门湾停车场」（官方停车场 10 元/天、30 分钟免费，步行 3–5 分钟即达顶街/海堤；备选「铜陵大市场停车场」首小时 3 元封顶 18 元）。顶街入口在铜陵镇下田街，左耳天台/文公祠在顶街内。<button class="navbtn" data-nav="南门湾停车场">一键导航</button></div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
@@ -307,7 +321,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     <div class="spot">
       <div class="spot-head"><span class="badge a">A2</span><h3>南门湾海堤</h3><span class="timechip">15:50–16:15 · 约 25 分钟</span></div>
       <p class="lead">《左耳》取景地，彩色渔村＋海堤日落是东山岛最出片的画面；本地人实测 15:30–18:30 是体验感最佳时段。</p>
-      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>同「南门湾停车场」，无需挪车，步行 5 分钟内到海堤。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>同「南门湾停车场」，无需挪车，步行 5 分钟内到海堤。<button class="navbtn" data-nav="南门湾停车场">一键导航</button></div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
@@ -329,7 +343,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     <div class="spot">
       <div class="spot-head"><span class="badge a">A3</span><h3>苏峰山环岛路</h3><span class="timechip">16:35–17:35 · 约 1 小时</span></div>
       <p class="lead">「福建最美环岛路」之一，一侧青山一侧碧海，蓝色大桥横跨悬崖。日落前 1 小时光线最好，正好安排在这里。时间给了 1 小时（含租车），旺季排队租车时<b>砍掉岩雅古村，保蓝色大桥和观景台</b>。</p>
-      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「苏峰山景区停车场（南侧）」（或北侧）。旺季 8:00–20:00 私家车禁止上山：车停山下停车场（约 15 元/天封顶），换场内租电驴或观光车；环岛路为单行线（南→北），勿逆行。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「苏峰山景区停车场（南侧）」（或北侧）。旺季 8:00–20:00 私家车禁止上山：车停山下停车场（约 15 元/天封顶），换场内租电驴或观光车；环岛路为单行线（南→北），勿逆行。<button class="navbtn" data-nav="苏峰山景区停车场">一键导航</button></div>
       <div class="note" style="margin-bottom:10px"><b>租电驴（就在停车场内，不用另找）：</b>南侧停车场「候车处左侧」即有租赁点——电动车 20 元/2 小时起、超时 10 元/小时、押金 199 元（无损退还），2 小时足够骑完一圈；也可坐观光车 10 元/人（当天往返通票，各观景台随上随下）。备选：南门湾/铜陵镇车行全天租电驴 40–50 元/天（旺季 60–80，续航 50–70km，需骑回原租车点还车）。</div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
@@ -354,7 +368,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     <div class="spot">
       <div class="spot-head"><span class="badge a">A4</span><h3>金銮湾／马銮湾日落</h3><span class="timechip">日落前 25 分钟到 · 约 40 分钟</span></div>
       <p class="lead">金銮湾沙滩坡度平缓，退潮后薄水覆滩、风平浪静时像一面镜子倒映天空（即"天空之镜"）。<b>镜面不是每次都有</b>：它需要当天傍晚处于退潮后 2 小时内、且无风，出发前在墨迹天气定位东山岛看低潮时间；如果当天傍晚是涨潮或风浪大，看不到镜面也不亏——宽长沙滩看橘子海日落和晚霞本身就成立。</p>
-      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「金銮湾沙滩停车场」（10 元/天封顶）；马銮湾顺路导航「马銮湾景区停车场」（10 元/天封顶）。苏峰山下山沿环岛路向南即到金銮湾。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「金銮湾沙滩停车场」（10 元/天封顶）；马銮湾顺路导航「马銮湾景区停车场」（10 元/天封顶）。苏峰山下山沿环岛路向南即到金銮湾。<button class="navbtn" data-nav="金銮湾沙滩">一键导航</button></div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
@@ -376,7 +390,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     <div class="spot">
       <div class="spot-head"><span class="badge a">A5</span><h3>铜陵夜市晚餐</h3><span class="timechip">约 19:00–20:00 · 不卡点</span></div>
       <p class="lead">回铜陵镇（古城老街小吃或夜市排档）。码头周边高价排档溢价偏高，点菜先问价，不盲目选网红店。</p>
-      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「铜陵夜市（东山岛店）」工业路 833 号；摊区在团结路×万祥路一带，19:00 后热闹。夜市停车免费。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「铜陵夜市（东山岛店）」工业路 833 号；摊区在团结路×万祥路一带，19:00 后热闹。夜市停车免费。<button class="navbtn" data-nav="铜陵夜市 东山岛">一键导航</button></div>
       <table>
         <colgroup><col style="width:24%"><col style="width:48%"><col style="width:28%"></colgroup>
         <thead><tr><th>推荐店</th><th>特色与价格</th><th>提示</th></tr></thead>
@@ -415,7 +429,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     <div class="spot">
       <div class="spot-head"><span class="badge b">B1</span><h3>风动石景区</h3><span class="timechip">触发：14:30 前就停好车、时间宽裕时</span></div>
       <p class="lead">「天下第一奇石」——高 4.37m、宽 4.57m、重约 200 吨，风吹能动却 600 年不倒；景区含铜山古城、关帝庙、虎崆滴玉。<b>它就在顶街旁边，东门出来步行 10 分钟就是南门湾，动线顺</b>。</p>
-      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「风动石景区停车场」（西门进，停车约 15 元/天，配充电桩）。门票 45 元/人（线上约 42），夏季 7:00–18:30、17:30 停止检票。<b>衔接位置：</b>如果 14:30 前已停好车，先花 1 小时逛风动石，再回顶街；14:30 后才到岛就放弃风动石，保顶街和日落。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「风动石景区停车场」（西门进，停车约 15 元/天，配充电桩）。门票 45 元/人（线上约 42），夏季 7:00–18:30、17:30 停止检票。<b>衔接位置：</b>如果 14:30 前已停好车，先花 1 小时逛风动石，再回顶街；14:30 后才到岛就放弃风动石，保顶街和日落。<button class="navbtn" data-nav="风动石景区 东山岛">一键导航</button></div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
@@ -440,7 +454,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     <div class="spot">
       <div class="spot-head"><span class="badge b">B2</span><h3>彩蝶湾</h3><span class="timechip">触发：18:20 前完成金銮湾日落＋马銮湾</span></div>
       <p class="lead">多巴胺色彩的童话世界——七彩漫道、橙色海景小火车、玻璃秋千阵、天空之门，随手一拍都是文艺大片。</p>
-      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「彩蝶湾景区」（康美镇）。<b>衔接位置：</b>插在金銮湾之后、夜市之前；19:10 必须撤离去夜市。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「彩蝶湾景区」（康美镇）。<b>衔接位置：</b>插在金銮湾之后、夜市之前；19:10 必须撤离去夜市。<button class="navbtn" data-nav="彩蝶湾景区 东山岛">一键导航</button></div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
@@ -463,7 +477,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     <div class="spot">
       <div class="spot-head"><span class="badge b">B3</span><h3>澳角村＋乌礁湾</h3><span class="timechip">触发：默认不去，会牺牲日落</span></div>
       <p class="lead">东山岛最渔村的角落：最美风车环海公路（约 8.8km）、断桥、天涯澳角悬崖、退潮海底溶洞，傍晚正好看渔船归港。</p>
-      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>先「乌礁湾广场」→ 再「澳角村/天涯澳角」。<b>衔接位置：</b>插在苏峰山之后、金銮湾日落之前，与日落二选一——去澳角就基本看不到镜面日落。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>先「乌礁湾广场」→ 再「澳角村/天涯澳角」。<b>衔接位置：</b>插在苏峰山之后、金銮湾日落之前，与日落二选一——去澳角就基本看不到镜面日落。<button class="navbtn" data-nav="天涯澳角">一键导航</button></div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
@@ -487,7 +501,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     <div class="spot">
       <div class="spot-head"><span class="badge b">B4</span><h3>南屿双面海／岐下村鱼骨沙洲</h3><span class="timechip">触发：仅适合早 6–9 点退潮窗口，本行程不安排</span></div>
       <p class="lead">中午出发、潮汐窗口不对，这两个点确定不去；留作清晨出发方案（按下方节奏走，全程约半天）。</p>
-      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「南屿」（铜陵镇西南近海）→「岐下村」（鱼骨沙洲乘船点）。<b>衔接位置：</b>不参与本行程；如未来清晨出行，金銮湾日出 → 南屿 → 岐下村一条线顺路。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「南屿」（铜陵镇西南近海）→「岐下村」（鱼骨沙洲乘船点）。<b>衔接位置：</b>不参与本行程；如未来清晨出行，金銮湾日出 → 南屿 → 岐下村一条线顺路。<button class="navbtn" data-nav="南屿双面海 东山岛">一键导航</button></div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
@@ -630,6 +644,36 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
   };
   legend.addTo(map);
 })();
+</script>
+
+<div class="navmodal" id="navModal">
+  <div class="navmodal-card">
+    <h4>选择导航 App</h4>
+    <p class="sub" id="navTargetName"></p>
+    <a id="navAmap" href="#"><span class="ico" style="background:#0092FF">高</span>高德地图</a>
+    <a id="navBaidu" href="#"><span class="ico" style="background:#3388FF">百</span>百度地图</a>
+    <a id="navApple" href="#"><span class="ico" style="background:#000">苹果</span>苹果地图</a>
+    <a id="navTencent" href="#"><span class="ico" style="background:#00BE39">腾</span>腾讯地图</a>
+    <button class="navmodal-close" id="navClose">取消</button>
+  </div>
+</div>
+
+<script>
+document.querySelectorAll('.navbtn').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    e.preventDefault();
+    const kw = btn.dataset.nav;
+    document.getElementById('navTargetName').textContent = '目的地：' + kw;
+    const enc = encodeURIComponent(kw);
+    document.getElementById('navAmap').href = 'https://uri.amap.com/search?keyword='+enc+'&callnative=1&src=dongshan-guide';
+    document.getElementById('navBaidu').href = 'https://api.map.baidu.com/place/search?query='+enc+'&region=%E6%BC%B3%E5%B7%9E&output=html';
+    document.getElementById('navApple').href = 'http://maps.apple.com/?q='+enc;
+    document.getElementById('navTencent').href = 'https://apis.map.qq.com/uri/v1/search?keyword='+enc+'&referer=dongshan-guide';
+    document.getElementById('navModal').classList.add('show');
+  });
+});
+document.getElementById('navClose').addEventListener('click',()=>document.getElementById('navModal').classList.remove('show'));
+document.getElementById('navModal').addEventListener('click',e=>{if(e.target.id==='navModal')e.target.classList.remove('show');});
 </script>
 </body>
 </html>
