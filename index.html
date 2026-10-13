@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>东山岛一日自驾游攻略（漳州）</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='10' cy='16' r='6' fill='%232E90C4'/%3E%3Ccircle cx='22' cy='16' r='6' fill='%23FF9D6C'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='10' cy='16' r='6' fill='%23087DA7'/%3E%3Ccircle cx='22' cy='16' r='6' fill='%23E57554'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap">
 <link rel="stylesheet" href="assets/leaflet.css">
 <style>
 :root{
-  --sea:#2E90C4; --sea-deep:#1B6E9E; --sea-light:#E8F4FA;
-  --sand:#FFFDF7; --sunset:#FF9D6C; --sunset-deep:#E97A3F;
-  --ink:#1F2329; --sub:#646A73; --line:#DEE3E8;
+  --sea:#087DA7; --sea-deep:#18334B; --sea-light:#EAF3F8;
+  --sand:#F5F9FC; --sunset:#E57554; --sunset-deep:#C85A3E;
+  --ink:#18334B; --sub:#637789; --line:#DFEAF1;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -20,7 +20,7 @@ img{max-width:100%;display:block}
 .wrap{max-width:960px;margin:0 auto;padding:0 20px}
 
 /* Hero */
-.hero{position:relative;min-height:340px;display:flex;align-items:flex-end;background:linear-gradient(180deg,rgba(27,110,158,.15) 0%,rgba(20,45,66,.78) 100%),url('assets/namenwan.jpg') center/cover no-repeat;color:#fff;padding:80px 0 34px}
+.hero{position:relative;min-height:340px;display:flex;align-items:flex-end;background:linear-gradient(180deg,rgba(8,125,167,.18) 0%,rgba(24,51,75,.82) 100%),url('assets/namenwan.jpg') center/cover no-repeat;color:#fff;padding:80px 0 34px}
 .hero .wrap{position:relative;z-index:1}
 .hero h1{font-size:clamp(26px,4vw,40px);font-weight:900;letter-spacing:1px}
 .hero .sub{margin-top:8px;font-size:15px;opacity:.92}
@@ -28,14 +28,14 @@ img{max-width:100%;display:block}
 .hero .tag{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(4px);padding:3px 12px;border-radius:999px;font-size:12.5px}
 
 /* Nav */
-nav{position:sticky;top:0;z-index:50;background:rgba(255,253,247,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav{position:sticky;top:0;z-index:50;background:rgba(245,249,252,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 nav .wrap{display:flex;gap:4px;overflow-x:auto;padding:10px 20px}
 nav a{color:var(--sea-deep);text-decoration:none;font-size:13.5px;font-weight:500;padding:4px 10px;border-radius:6px;white-space:nowrap;transition:background .15s}
 nav a:hover{background:var(--sea-light)}
 
 /* Sections */
 section{padding:44px 0 8px;scroll-margin-top:60px}
-.notice{background:#FFF8E6;border:1px solid #F0D98C;border-radius:10px;padding:12px 16px;font-size:13px;color:#7A5C00;margin-bottom:22px;line-height:1.6}
+.notice{background:#FFF7ED;border:1px solid #F5D9B8;border-radius:10px;padding:12px 16px;font-size:13px;color:#8A5A2B;margin-bottom:22px;line-height:1.6}
 .sec-tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--sea-deep);margin-bottom:6px}
 h2.sec-title{font-size:26px;font-weight:900;margin-bottom:6px}
 .sec-desc{color:var(--sub);font-size:14px;margin-bottom:22px}
@@ -78,9 +78,9 @@ h2.sec-title{font-size:26px;font-weight:900;margin-bottom:6px}
 .spot .navline{background:var(--sea-light);border-radius:8px;padding:9px 12px;font-size:13px;margin:10px 0 14px}
 .spot .navline b{color:var(--sea-deep)}
 table{width:100%;table-layout:fixed;border-collapse:collapse;margin:10px 0 14px;font-size:13.5px}
-table th{background:#F2F4F6;text-align:left;font-weight:700;padding:8px 10px;border:1px solid var(--line)}
+table th{background:#EAF3F8;text-align:left;font-weight:700;padding:8px 10px;border:1px solid var(--line)}
 table td{padding:8px 10px;border:1px solid var(--line);vertical-align:top}
-table tr:nth-child(even) td{background:#FAFBFC}
+table tr:nth-child(even) td{background:#F8FBFD}
 .col-step{width:12%}.col-do{width:62%}.col-time{width:26%}
 .notes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
 .note{background:var(--sand);border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:13px}
@@ -92,16 +92,16 @@ table tr:nth-child(even) td{background:#FAFBFC}
 .vidline a{color:var(--sea-deep)}
 
 /* B rules */
-.rulebox{background:#FFF4EC;border:1px solid #F5D9C8;border-radius:10px;padding:14px 16px;font-size:13.5px;margin-bottom:20px}
+.rulebox{background:#FFF7ED;border:1px solid #F5D9B8;border-radius:10px;padding:14px 16px;font-size:13.5px;margin-bottom:20px}
 .rulebox b{color:var(--sunset-deep)}
 
 /* Foldable details */
 details.dtl{margin-top:12px}
-details.dtl summary{cursor:pointer;font-size:13.5px;font-weight:700;color:#fff;background:var(--sea);padding:10px 16px;border-radius:999px;list-style:none;outline:none;user-select:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 2px 6px rgba(46,144,196,.3);transition:transform .12s, box-shadow .12s}
+details.dtl summary{cursor:pointer;font-size:13.5px;font-weight:700;color:#fff;background:var(--sea);padding:10px 16px;border-radius:999px;list-style:none;outline:none;user-select:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 2px 6px rgba(8,125,167,.28);transition:transform .12s, box-shadow .12s}
 details.dtl summary::-webkit-details-marker{display:none}
 details.dtl summary::before{content:"";width:0;height:0;border-left:6px solid #fff;border-top:4px solid transparent;border-bottom:4px solid transparent}
 details.dtl summary::after{content:"展开";font-size:12px;font-weight:500;opacity:.9;border:1px solid rgba(255,255,255,.55);padding:1px 9px;border-radius:999px}
-details.dtl summary:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(46,144,196,.45)}
+details.dtl summary:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(8,125,167,.4)}
 details.dtl[open] summary{background:var(--sea-deep);margin-bottom:14px}
 details.dtl[open] summary::before{border-left:none;border-top:6px solid #fff;border-right:4px solid transparent;border-left:4px solid transparent}
 details.dtl[open] summary::after{content:"收起"}
