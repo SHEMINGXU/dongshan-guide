@@ -34,7 +34,8 @@ nav a{color:var(--sea-deep);text-decoration:none;font-size:13.5px;font-weight:50
 nav a:hover{background:var(--sea-light)}
 
 /* Sections */
-section{padding:44px 0 8px}
+section{padding:44px 0 8px;scroll-margin-top:60px}
+.notice{background:#FFF8E6;border:1px solid #F0D98C;border-radius:10px;padding:12px 16px;font-size:13px;color:#7A5C00;margin-bottom:22px;line-height:1.6}
 .sec-tag{display:inline-block;font-size:12px;font-weight:700;letter-spacing:2px;color:var(--sea-deep);margin-bottom:6px}
 h2.sec-title{font-size:26px;font-weight:900;margin-bottom:6px}
 .sec-desc{color:var(--sub);font-size:14px;margin-bottom:22px}
@@ -94,6 +95,15 @@ table tr:nth-child(even) td{background:#FAFBFC}
 .rulebox{background:#FFF4EC;border:1px solid #F5D9C8;border-radius:10px;padding:14px 16px;font-size:13.5px;margin-bottom:20px}
 .rulebox b{color:var(--sunset-deep)}
 
+/* Foldable details */
+details.dtl{margin-top:10px}
+details.dtl summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--sea-deep);background:var(--sea-light);padding:8px 12px;border-radius:8px;list-style:none;outline:none;user-select:none}
+details.dtl summary::-webkit-details-marker{display:none}
+details.dtl summary::before{content:"▸ ";color:var(--sea-deep)}
+details.dtl[open] summary::before{content:"▾ "}
+details.dtl[open] summary{margin-bottom:12px}
+details.dtl summary:hover{background:#DCEEF7}
+
 /* Backup / verify / video */
 .alt-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
 .alt{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px}
@@ -122,9 +132,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
 <header class="hero">
   <div class="wrap">
     <h1>东山岛（漳州）一日自驾游攻略</h1>
-    <p class="sub">2026-09-28（周一）· 2 人自驾 · 潮州出发可晚归 · 全程几乎免门票，9 月开海海鲜正肥</p>
+    <p class="sub">2 人自驾 · 潮州出发可晚归 · 全程几乎免门票 · 秋季海鲜肥美</p>
     <div class="tags">
-      <span class="tag">13:00 出发</span><span class="tag">约 1.5–2h 车程</span><span class="tag">金銮湾日落（约 18:00）</span><span class="tag">20:00 返程</span>
+      <span class="tag">午后出发</span><span class="tag">约 1.5–2h 车程</span><span class="tag">金銮湾日落（查当日时间）</span><span class="tag">晚饭後返程</span>
     </div>
   </div>
 </header>
@@ -136,6 +146,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     <a href="#itinerary">当日行程</a>
     <a href="#planB">B 档规则</a>
     <a href="#backup">备选方案</a>
+    <a href="#verify">信息核验</a>
     <a href="#videos">视频库</a>
   </div>
 </nav>
@@ -145,14 +156,15 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
   <div class="wrap">
     <span class="sec-tag">OVERVIEW</span>
     <h2 class="sec-title">行程速览</h2>
+    <div class="notice"><b>使用说明：</b>本路线基于 2026 年 9 月底实地核验。天气、日落时间、潮汐、票价、停车政策与餐厅营业状态会随季节变化，<b>出发前 1 天请用天气 App（查日落与潮汐）和高德（查停车/餐厅营业）复核一次</b>。下午出发的一天行程时间偏紧，日落是硬锚点，前面环节超时就按文末「备选方案」压缩。</div>
     <p class="sec-desc">中午饭后从潮州出发，从岛东北的铜陵镇开始一路向南串 4 站：顶街文公祠 → 苏峰山环岛路 → 金銮湾日落 → 铜陵夜市海鲜。蓝色为必去 A 档，橙色为有时间再去的 B 档。</p>
     <div class="info-grid">
-      <div class="info-card"><div class="k">出发</div><div class="v">13:00 潮州<small>午饭在潮州解决后出发</small></div></div>
-      <div class="info-card"><div class="k">车程</div><div class="v">约 1.5–2h<small>约 110km 高速，高德实测 1h32–1h42</small></div></div>
-      <div class="info-card"><div class="k">天气</div><div class="v">参考 26–32°C<small>9 月末 · 出行前查当日预报</small></div></div>
-      <div class="info-card"><div class="k">日落</div><div class="v">约 18:00<small>随季节变化 · 金銮湾镜面沙滩观日落</small></div></div>
-      <div class="info-card"><div class="k">潮汐</div><div class="v">以当日潮汐表为准<small>双面海·鱼骨沙洲仅适早 6–9 点退潮窗口</small></div></div>
-      <div class="info-card"><div class="k">预算</div><div class="v">约 450–650 元<small>2 人含油费高速、餐饮与机动额度</small></div></div>
+      <div class="info-card"><div class="k">出发</div><div class="v">午饭后潮州出发<small>午饭在潮州解决后，约 13:00 上路</small></div></div>
+      <div class="info-card"><div class="k">车程</div><div class="v">约 1.5–2h<small>走 G15 沈海高速→S64 东山支线出口，约 110km</small></div></div>
+      <div class="info-card"><div class="k">天气</div><div class="v">出发前查当日<small>秋季海边昼夜温差大，带薄外套</small></div></div>
+      <div class="info-card"><div class="k">日落</div><div class="v">日落前 25 分钟到位<small>9 月底约 18:00，之后每月提前 10–15 分钟，以天气 App 为准</small></div></div>
+      <div class="info-card"><div class="k">潮汐</div><div class="v">墨迹天气定位东山岛<small>看当日低潮时间；镜面沙滩需退潮后 2 小时内</small></div></div>
+      <div class="info-card"><div class="k">预算</div><div class="v">人均约 230–330 元<small>2 人合计含油费高速、餐饮与机动额度</small></div></div>
     </div>
     <div class="map-box">
       <div id="map"></div>
@@ -161,17 +173,17 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
 
     <h3 style="font-size:17px;font-weight:900;margin:22px 0 10px">当日时间线</h3>
     <div class="tl">
-      <div class="time">13:00</div><div class="axis"><span class="dot"></span></div><div class="body"><b>潮州出发</b><p>导航「南门湾停车场」，约 110km 高速</p></div>
-      <div class="time">14:30</div><div class="axis"><span class="dot"></span></div><div class="body"><b>抵岛 · 停车</b><p>南门湾停车场 10 元/天，步行 3–5 分钟进顶街</p></div>
-      <div class="time">14:50–15:50</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A1 顶街＋文公祠观景台</b><p>大字墙·灯塔·涂鸦巷·左耳天台·南望天台</p></div>
-      <div class="time">15:55–16:25</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A2 南门湾海堤</b><p>《左耳》取景地，彩色民居＋堤坝机位</p></div>
-      <div class="time">16:25–16:50</div><div class="axis"><span class="dot"></span></div><div class="body"><b>转场</b><p>车程约 25 分钟（南门湾 → 苏峰山）</p></div>
-      <div class="time">16:50–17:35</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A3 苏峰山环岛路</b><p>蓝色大桥·观景台·岩雅古村；最晚 17:40 撤</p></div>
+      <div class="time">13:00</div><div class="axis"><span class="dot"></span></div><div class="body"><b>潮州出发</b><p>导航「南门湾停车场」，G15 沈海高速→S64 东山支线出口，约 110km</p></div>
+      <div class="time">14:30</div><div class="axis"><span class="dot"></span></div><div class="body"><b>抵岛 · 停车步行</b><p>南门湾停车场 10 元/天，步行 10–15 分钟进顶街</p></div>
+      <div class="time">14:45–15:45</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A1 顶街＋文公祠观景台</b><p>大字墙·灯塔·涂鸦巷·左耳天台·南望天台</p></div>
+      <div class="time">15:50–16:15</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A2 南门湾海堤</b><p>《左耳》取景地，彩色民居＋堤坝机位</p></div>
+      <div class="time">16:15–16:35</div><div class="axis"><span class="dot"></span></div><div class="body"><b>转场</b><p>车程约 20 分钟（南门湾 → 苏峰山南侧停车场）</p></div>
+      <div class="time">16:35–17:35</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A3 苏峰山环岛路</b><p>租电驴上蓝色大桥·观景台·岩雅古村；17:35 必须撤</p></div>
       <div class="time">17:35–17:55</div><div class="axis"><span class="dot"></span></div><div class="body"><b>转场</b><p>车程约 20 分钟（苏峰山 → 金銮湾）</p></div>
-      <div class="time">17:55–18:30</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A4 金銮湾／马銮湾日落</b><p>日落（约 18:00）· 退潮期镜面倒影大概率可见</p></div>
-      <div class="time">18:30–18:50</div><div class="axis"><span class="dot"></span></div><div class="body"><b>转场 · 夜市</b><p>车程约 20 分钟回铜陵镇</p></div>
-      <div class="time">18:50–19:45</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A5 铜陵夜市晚餐</b><p>海鲜排档＋古城老街小吃；最晚 19:50 结束</p></div>
-      <div class="time">20:00</div><div class="axis"><span class="dot"></span></div><div class="body"><b>返程</b><p>约 21:30–22:00 到家</p></div>
+      <div class="time">17:55 起</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A4 金銮湾／马銮湾日落</b><p>日落前到位（9 月底约 18:00）· 退潮期镜面倒影，日落后再留 10–15 分钟看晚霞</p></div>
+      <div class="time">日落後 20 分钟</div><div class="axis"><span class="dot"></span></div><div class="body"><b>转场 · 夜市</b><p>车程约 20 分钟回铜陵镇</p></div>
+      <div class="time">约 19:00–20:00</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A5 铜陵夜市晚餐</b><p>海鲜排档＋古城老街小吃，丰俭由人，不卡点</p></div>
+      <div class="time">20:00–20:15</div><div class="axis"><span class="dot"></span></div><div class="body"><b>返程</b><p>约 21:30–22:00 到家；想多看一会儿夜景可推迟到 21:00 走</p></div>
     </div>
   </div>
 </section>
@@ -181,10 +193,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
   <div class="wrap">
     <span class="sec-tag">PREPARE</span>
     <h2 class="sec-title">行前准备（出发前 1 天核验）</h2>
-    <p class="sec-desc">对照打勾，按 9 月晴日 26–32°C、紫外线 5 级强、傍晚海边风大准备。</p>
+    <p class="sec-desc">对照打勾。海边白天日晒强、傍晚风大，按秋季晴日气候准备，带一件薄外套。</p>
     <div class="spot">
       <h3 style="font-size:17px;font-weight:900;margin-bottom:8px">出发前携带清单</h3>
-      <table>
+      <details class="dtl" open><summary>展开携带清单（20+ 项）</summary><table>
         <colgroup><col style="width:14%"><col style="width:34%"><col style="width:52%"></colgroup>
         <thead><tr><th>类别</th><th>物品</th><th>说明</th></tr></thead>
         <tbody>
@@ -219,7 +231,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
           <tr><td>垃圾袋</td><td>沙滩和车内收纳</td></tr>
           <tr><td>轻便背包</td><td>集中装以上物品，空手逛</td></tr>
         </tbody>
-      </table>
+      </table></details>
       <div class="notes">
         <div class="note"><b>出发前 10 分钟复查：</b>天气/潮汐核验一次（若加夜游/营地，电话确认今晚营业）；导航设好第一站「南门湾停车场」；车加油充电完成</div>
       </div>
@@ -234,7 +246,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
       </ul>
       <h3 style="font-size:17px;font-weight:900;margin:16px 0 8px">导航、停车与岛内交通</h3>
       <ul style="margin:6px 0 0 20px;font-size:13.5px">
-        <li style="margin:5px 0"><b>导航：</b>直接导「南门湾停车场」（铜陵镇），上岛后各点用高德搜「顶街」「苏峰山环岛路」「金銮湾」即可</li>
+        <li style="margin:5px 0"><b>高速路线：</b>潮州上 G15 沈海高速往汕头/诏安方向 → 竹港枢纽转 <b>S64 东山支线</b> → 「东山岛/陈城」出口下（以实际路牌为准），全程约 110km，单程高速费约 50–70 元（ETC 实扣为准），上岛无额外桥费</li>
+        <li style="margin:5px 0"><b>岛上导航：</b>第一站直接导「南门湾停车场」（铜陵镇）；之后各点用高德搜「顶街」「苏峰山环岛路」「金銮湾」即可</li>
         <li style="margin:5px 0"><b>停车：</b>南门湾公共停车场小车 10 元/天</li>
         <li style="margin:5px 0"><b>岛内移动：</b>苏峰山环岛路旺季白天私家车禁上，租电动车（约 40 元/天）最灵活；不骑车可选景区观光车</li>
       </ul>
@@ -264,9 +277,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     <p class="sec-desc">A 档为必去主线，B 档只在满足触发条件时插入（规则见下方）。每站含导航、分步玩法（加粗为亮点）、避坑与实景参考。</p>
 
     <div class="spot">
-      <div class="spot-head"><span class="badge a">A1</span><h3>顶街＋文公祠观景台（左耳·南望天台）</h3><span class="timechip">14:50–15:50 · 约 1 小时</span></div>
+      <div class="spot-head"><span class="badge a">A1</span><h3>顶街＋文公祠观景台（左耳·南望天台）</h3><span class="timechip">14:45–15:45 · 约 1 小时</span></div>
       <p class="lead">东山岛人文精华都在铜陵镇。这条 600 年老街上街是精华段，网红店与打卡点集中，多钻旁边小巷藏着原汁原味老厝。</p>
-      <div class="navline"><b>导航：</b>「南门湾停车场」（官方停车场 10 元/天、30 分钟免费，步行 3–5 分钟即达顶街/海堤；备选「铜陵大市场停车场」首小时 3 元封顶 18 元）。顶街入口在铜陵镇下田街，左耳天台/文公祠在顶街内。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「南门湾停车场」（官方停车场 10 元/天、30 分钟免费，步行 3–5 分钟即达顶街/海堤；备选「铜陵大市场停车场」首小时 3 元封顶 18 元）。顶街入口在铜陵镇下田街，左耳天台/文公祠在顶街内。</div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
@@ -278,7 +291,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
           <tr><td>5</td><td>文公祠观景台 → <b>左耳天台</b>（圆柱石墩处）→ <b>南望天台</b>（绿荫小道下去，咖啡屋）</td><td>25–30 分钟</td></tr>
         </tbody>
       </table>
-      <img src="assets/dingjie.jpg" alt="顶街天台俯瞰南门湾">
+      <img src="assets/dingjie.jpg" alt="顶街天台俯瞰南门湾" loading="lazy">
       <p class="imgcap">顶街文公祠一带天台可俯瞰整个南门湾海岸线</p>
       <div class="notes">
         <div class="note"><b>边走边吃：</b>古早小吃、猫仔粥、蚵仔煎、小媳妇甜汤</div>
@@ -287,12 +300,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
         <div class="note"><b>怎么玩：</b>按上表顺序走，全程约 1 小时；中途可随时停下拍照、吃小吃</div>
       </div>
       <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7668742081066064730">抖音·南望天台带路（导航搜不到）</a> · <a href="https://www.iesdouyin.com/share/video/7664902541587864817">抖音·顶街 8 大拍照机位</a> · <a href="https://www.iesdouyin.com/share/video/7672385419732233856">抖音·南门湾/顶街 3 天 2 夜实测</a></p>
-    </div>
+    </details></div>
 
     <div class="spot">
-      <div class="spot-head"><span class="badge a">A2</span><h3>南门湾海堤</h3><span class="timechip">15:55–16:25 · 约 30 分钟</span></div>
+      <div class="spot-head"><span class="badge a">A2</span><h3>南门湾海堤</h3><span class="timechip">15:50–16:15 · 约 25 分钟</span></div>
       <p class="lead">《左耳》取景地，彩色渔村＋海堤日落是东山岛最出片的画面；本地人实测 15:30–18:30 是体验感最佳时段。</p>
-      <div class="navline"><b>导航：</b>同「南门湾停车场」，无需挪车，步行 5 分钟内到海堤。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>同「南门湾停车场」，无需挪车，步行 5 分钟内到海堤。</div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
@@ -302,19 +315,19 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
           <tr><td>3</td><td><b>堤坝机位</b>：电影同款视角拍照</td><td>10 分钟</td></tr>
         </tbody>
       </table>
-      <img src="assets/namenwan.jpg" alt="南门湾彩色房子海堤">
+      <img src="assets/namenwan.jpg" alt="南门湾彩色房子海堤" loading="lazy">
       <p class="imgcap">南门湾海堤旁的彩色临海民居</p>
       <div class="notes">
         <div class="note"><b>加分项：</b>落日时分彩色房子配海面随手出片；时间富余可上左耳天台俯瞰海湾</div>
         <div class="note orange"><b>避坑：</b>海堤无遮阴，防晒别停；南门湾小吃街游客扎堆、口味偏商业化，晚餐不安排在这里</div>
       </div>
       <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7672385419732233856">抖音·南门湾/顶街 3 天 2 夜实测</a> · <a href="https://www.iesdouyin.com/share/video/7646997948634647851">抖音·2 天 1 晚精华路线（含南门湾机位）</a></p>
-    </div>
+    </details></div>
 
     <div class="spot">
-      <div class="spot-head"><span class="badge a">A3</span><h3>苏峰山环岛路</h3><span class="timechip">16:50–17:35 · 约 45 分钟</span></div>
-      <p class="lead">「福建最美环岛路」之一，一侧青山一侧碧海，蓝色大桥横跨悬崖。日落前 1 小时光线最好，正好是安排的时间。</p>
-      <div class="navline"><b>导航：</b>「苏峰山景区停车场（南侧）」（或北侧）。旺季 8:00–20:00 私家车禁止上山：车停山下停车场（约 15 元/天封顶），换场内租电驴或观光车；环岛路为单行线（南→北），勿逆行。</div>
+      <div class="spot-head"><span class="badge a">A3</span><h3>苏峰山环岛路</h3><span class="timechip">16:35–17:35 · 约 1 小时</span></div>
+      <p class="lead">「福建最美环岛路」之一，一侧青山一侧碧海，蓝色大桥横跨悬崖。日落前 1 小时光线最好，正好安排在这里。时间给了 1 小时（含租车），旺季排队租车时<b>砍掉岩雅古村，保蓝色大桥和观景台</b>。</p>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「苏峰山景区停车场（南侧）」（或北侧）。旺季 8:00–20:00 私家车禁止上山：车停山下停车场（约 15 元/天封顶），换场内租电驴或观光车；环岛路为单行线（南→北），勿逆行。</div>
       <div class="note" style="margin-bottom:10px"><b>租电驴（就在停车场内，不用另找）：</b>南侧停车场「候车处左侧」即有租赁点——电动车 20 元/2 小时起、超时 10 元/小时、押金 199 元（无损退还），2 小时足够骑完一圈；也可坐观光车 10 元/人（当天往返通票，各观景台随上随下）。备选：南门湾/铜陵镇车行全天租电驴 40–50 元/天（旺季 60–80，续航 50–70km，需骑回原租车点还车）。</div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
@@ -327,40 +340,41 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
           <tr><td>5</td><td>拍完原路返回或继续向前（环岛路单行线，勿逆行）</td><td>—</td></tr>
         </tbody>
       </table>
-      <img src="assets/sufengshan.jpg" alt="苏峰山环岛路蓝色大桥">
+      <img src="assets/sufengshan.jpg" alt="苏峰山环岛路蓝色大桥" loading="lazy">
       <p class="imgcap">苏峰山环岛路网红蓝色大桥</p>
       <div class="notes">
         <div class="note"><b>加分项：</b>岩雅村段人少安静，适合拍无人大片</div>
-        <div class="note orange"><b>避坑：</b>旺季白天私家车禁止驶入环岛路；弯道勿随意停车，到指定观景区域停靠；租车前检查电量刹车、骑行戴头盔；最晚 17:40 撤，留足转场时间</div>
+        <div class="note orange"><b>避坑：</b>旺季白天私家车禁止驶入环岛路；弯道勿随意停车，到指定观景区域停靠；租车前检查电量刹车、骑行戴头盔；<b>17:35 必须撤</b>，晚了就赶不上金銮湾日落</div>
       </div>
       <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7661223653057096306">抖音·苏峰山环岛骑行</a> · <a href="https://www.iesdouyin.com/share/video/7689040236798624433">抖音·J 人实测（含苏峰山三路线）</a></p>
-    </div>
+    </details></div>
 
     <div class="spot">
-      <div class="spot-head"><span class="badge a">A4</span><h3>金銮湾／马銮湾日落</h3><span class="timechip">17:55–18:30 · 约 35 分钟</span></div>
-      <p class="lead">金銮湾沙滩坡度平缓，退潮后像一面镜子倒映天空。出行日若处于退潮期（9 月末参考：午后至傍晚多为退潮），傍晚大概率能看到天空之镜效果。</p>
-      <div class="navline"><b>导航：</b>「金銮湾沙滩停车场」（10 元/天封顶）；马銮湾顺路导航「马銮湾景区停车场」（10 元/天封顶）。苏峰山下山沿环岛路向南即到金銮湾。</div>
+      <div class="spot-head"><span class="badge a">A4</span><h3>金銮湾／马銮湾日落</h3><span class="timechip">日落前 25 分钟到 · 约 40 分钟</span></div>
+      <p class="lead">金銮湾沙滩坡度平缓，退潮后薄水覆滩、风平浪静时像一面镜子倒映天空（即"天空之镜"）。<b>镜面不是每次都有</b>：它需要当天傍晚处于退潮后 2 小时内、且无风，出发前在墨迹天气定位东山岛看低潮时间；如果当天傍晚是涨潮或风浪大，看不到镜面也不亏——宽长沙滩看橘子海日落和晚霞本身就成立。</p>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「金銮湾沙滩停车场」（10 元/天封顶）；马銮湾顺路导航「马銮湾景区停车场」（10 元/天封顶）。苏峰山下山沿环岛路向南即到金銮湾。</div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
         <tbody>
-          <tr><td>1</td><td>到金銮湾沙滩：等日落（约 18:00）、拍<b>镜面倒影</b></td><td>20 分钟</td></tr>
-          <tr><td>2</td><td>顺路马銮湾踩水（两湾车程约 10 分钟）</td><td>10 分钟</td></tr>
+          <tr><td>1</td><td>到金銮湾沙滩：先看滩面——退潮后薄水层=能拍<b>镜面倒影</b>；涨潮=直接看日落踩水</td><td>5 分钟</td></tr>
+          <tr><td>2</td><td>等日落（9 月底约 18:00，其他月份以天气 App 为准），日落后再留 10–15 分钟看晚霞</td><td>25 分钟</td></tr>
+          <tr><td>3</td><td>人多或镜面没出 → 开车 10 分钟到<b>马銮湾</b>（木麻黄林栈道，不同机位）</td><td>顺路</td></tr>
         </tbody>
       </table>
-      <img src="assets/jinluanwan.jpg" alt="金銮湾晚霞镜面沙滩">
-      <p class="imgcap">金銮湾退潮后的镜面沙滩与晚霞</p>
+      <img src="assets/jinluanwan.jpg" alt="金銮湾晚霞镜面沙滩" loading="lazy">
+      <p class="imgcap">金銮湾退潮后的镜面沙滩与晚霞（涨潮时就是普通沙滩日落）</p>
       <div class="notes">
-        <div class="note"><b>加分项：</b>17:55 前到位，别错过日落；低角度拍摄倒影更完整</div>
-        <div class="note orange"><b>避坑：</b>涨潮时看不到镜面效果；马銮湾下海注意海浪变化，不去深水区；沙滩风大，傍晚带薄外套</div>
+        <div class="note"><b>加分项：</b>日落前 5 分钟到位，低角度蹲拍倒影更完整；带薄外套，傍晚海边风大</div>
+        <div class="note orange"><b>保底方案：</b>镜面看不到≠行程失败——日落晚霞、踩水、沙滩散步都成立；马銮湾是备选机位，开车 10 分钟</div>
       </div>
       <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7678995714786464891">抖音·保姆级逛吃攻略（机位＋路线图）</a> · <a href="https://www.iesdouyin.com/share/video/7689040236798624433">抖音·J 人实测（含金銮湾日落）</a></p>
-    </div>
+    </details></div>
 
     <div class="spot">
-      <div class="spot-head"><span class="badge a">A5</span><h3>铜陵夜市晚餐</h3><span class="timechip">18:50–19:45 · 约 1 小时</span></div>
+      <div class="spot-head"><span class="badge a">A5</span><h3>铜陵夜市晚餐</h3><span class="timechip">约 19:00–20:00 · 不卡点</span></div>
       <p class="lead">回铜陵镇（古城老街小吃或夜市排档）。码头周边高价排档溢价偏高，点菜先问价，不盲目选网红店。</p>
-      <div class="navline"><b>导航：</b>「铜陵夜市（东山岛店）」工业路 833 号；摊区在团结路×万祥路一带，19:00 后热闹。夜市停车免费。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「铜陵夜市（东山岛店）」工业路 833 号；摊区在团结路×万祥路一带，19:00 后热闹。夜市停车免费。</div>
       <table>
         <colgroup><col style="width:24%"><col style="width:48%"><col style="width:28%"></colgroup>
         <thead><tr><th>推荐店</th><th>特色与价格</th><th>提示</th></tr></thead>
@@ -374,14 +388,15 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
           <tr><td><b>方记烤吧</b></td><td>手工炭火烧烤</td><td>—</td></tr>
         </tbody>
       </table>
-      <img src="assets/yexi.jpg" alt="东山岛海边海鲜晚餐">
+      <img src="assets/yexi.jpg" alt="东山岛海边海鲜晚餐" loading="lazy">
       <p class="imgcap">铜陵夜市的海鲜排档晚餐</p>
       <div class="notes">
         <div class="note"><b>怎么吃：</b>推荐店见上表，丰俭由人；甜汤/鸡腿小吃收尾再启程</div>
-        <div class="note orange"><b>避坑：</b>海鲜排档点菜先问价、看清称重；晚餐最晚 19:50 结束，20:00 启程返潮州</div>
+        <div class="note orange"><b>避坑：</b>海鲜排档点菜先问价、看清称重；晚饭不卡点，吃完天黑透再返程更安全</div>
+        <div class="note"><b>店铺时效：</b>以下店名来自 2026 年 9 月博主分享，出发前请用高德/大众点评搜店名确认<b>是否仍营业、人均是否变动</b>，避免扑空</div>
       </div>
       <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7656423289862923387">抖音·黄金一日路线＋必吃</a> · <a href="https://www.iesdouyin.com/share/video/7678995714786464891">抖音·保姆级逛吃攻略（美食）</a></p>
-    </div>
+    </details></div>
   </div>
 </section>
 
@@ -396,9 +411,9 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     </div>
 
     <div class="spot">
-      <div class="spot-head"><span class="badge b">B1</span><h3>风动石景区</h3><span class="timechip">触发：14:50 前逛完顶街或 13:30 前上岛</span></div>
-      <p class="lead">「天下第一奇石」——高 4.37m、宽 4.57m、重约 200 吨，风吹能动却 600 年不倒；景区含铜山古城、关帝庙、虎崆滴玉。</p>
-      <div class="navline"><b>导航：</b>「风动石景区停车场」（西门进，停车约 15 元/天，配充电桩）。门票 45 元/人（线上约 42），夏季 7:00–18:30、17:30 停止检票。<b>衔接位置：</b>插在顶街之后、南门湾之前；15:30 后未到放弃。</div>
+      <div class="spot-head"><span class="badge b">B1</span><h3>风动石景区</h3><span class="timechip">触发：14:30 前就停好车、时间宽裕时</span></div>
+      <p class="lead">「天下第一奇石」——高 4.37m、宽 4.57m、重约 200 吨，风吹能动却 600 年不倒；景区含铜山古城、关帝庙、虎崆滴玉。<b>它就在顶街旁边，东门出来步行 10 分钟就是南门湾，动线顺</b>。</p>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「风动石景区停车场」（西门进，停车约 15 元/天，配充电桩）。门票 45 元/人（线上约 42），夏季 7:00–18:30、17:30 停止检票。<b>衔接位置：</b>如果 14:30 前已停好车，先花 1 小时逛风动石，再回顶街；14:30 后才到岛就放弃风动石，保顶街和日落。</div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
@@ -411,19 +426,19 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
           <tr><td>6</td><td>东门出（南门出即南门湾，步行约 10 分钟衔接）</td><td>—</td></tr>
         </tbody>
       </table>
-      <img src="assets/fengdongshi.jpg" alt="东山风动石">
+      <img src="assets/fengdongshi.jpg" alt="东山风动石" loading="lazy">
       <p class="imgcap">坐落在海滨石崖上的东山风动石</p>
       <div class="notes">
         <div class="note"><b>加分项：</b>下午 3 点后游客少；内部电瓶车没必要，步行即可</div>
         <div class="note orange"><b>避坑：</b>景区门口纪念品偏贵，去铜陵老街买；东门屿需另购票+轮渡（约半小时一班），时间紧直接跳过；17:30 停止检票，别卡点进</div>
       </div>
       <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7573871546110158009">抖音·风动石景区云游（铜山古城文化）</a></p>
-    </div>
+    </details></div>
 
     <div class="spot">
       <div class="spot-head"><span class="badge b">B2</span><h3>彩蝶湾</h3><span class="timechip">触发：18:20 前完成金銮湾日落＋马銮湾</span></div>
       <p class="lead">多巴胺色彩的童话世界——七彩漫道、橙色海景小火车、玻璃秋千阵、天空之门，随手一拍都是文艺大片。</p>
-      <div class="navline"><b>导航：</b>「彩蝶湾景区」（康美镇）。<b>衔接位置：</b>插在金銮湾之后、夜市之前；19:10 必须撤离去夜市。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「彩蝶湾景区」（康美镇）。<b>衔接位置：</b>插在金銮湾之后、夜市之前；19:10 必须撤离去夜市。</div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
@@ -434,19 +449,19 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
           <tr><td>4</td><td><b>天空之门</b>（纯白建筑＋海天镜面倒影）</td><td>10 分钟</td></tr>
         </tbody>
       </table>
-      <img src="assets/caidiewan.jpg" alt="彩蝶湾彩虹步道与小火车">
+      <img src="assets/caidiewan.jpg" alt="彩蝶湾彩虹步道与小火车" loading="lazy">
       <p class="imgcap">彩蝶湾七彩漫道与海景小火车</p>
       <div class="notes">
         <div class="note"><b>加分项：</b>上午 9 点前坐小火车人最少（午后前往，人略多但可接受）</div>
         <div class="note orange"><b>避坑：</b>海边风大注意保暖防晒；礁石/沙滩穿防滑拖鞋或运动鞋</div>
       </div>
       <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7344733957067476261">抖音·东山自驾游攻略（马銮湾/彩蝶湾/双面海站）</a></p>
-    </div>
+    </details></div>
 
     <div class="spot">
       <div class="spot-head"><span class="badge b">B3</span><h3>澳角村＋乌礁湾</h3><span class="timechip">触发：默认不去，会牺牲日落</span></div>
       <p class="lead">东山岛最渔村的角落：最美风车环海公路（约 8.8km）、断桥、天涯澳角悬崖、退潮海底溶洞，傍晚正好看渔船归港。</p>
-      <div class="navline"><b>导航：</b>先「乌礁湾广场」→ 再「澳角村/天涯澳角」。<b>衔接位置：</b>插在苏峰山之后、金銮湾日落之前，与日落二选一——去澳角就基本看不到镜面日落。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>先「乌礁湾广场」→ 再「澳角村/天涯澳角」。<b>衔接位置：</b>插在苏峰山之后、金銮湾日落之前，与日落二选一——去澳角就基本看不到镜面日落。</div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
@@ -458,19 +473,19 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
           <tr><td>5</td><td>傍晚看<b>渔船归港</b></td><td>20 分钟</td></tr>
         </tbody>
       </table>
-      <img src="assets/wujiaowan.jpg" alt="乌礁湾风车公路">
+      <img src="assets/wujiaowan.jpg" alt="乌礁湾风车公路" loading="lazy">
       <p class="imgcap">乌礁湾风车环海公路</p>
       <div class="notes">
         <div class="note"><b>交通：</b>电驴全程约 35km（选高续航车型）或自驾；公交有直达专线但班次少；节假日南部叫车难</div>
         <div class="note orange"><b>避坑：</b>礁石湿滑必须防滑鞋并结伴；溶洞要卡退潮；电驴电量要够；去澳角=放弃金銮湾镜面日落，二选一</div>
       </div>
       <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7654876325749376505">抖音·澳角渔村小众攻略（免门票）</a> · <a href="https://www.iesdouyin.com/share/video/7676032501094000121">抖音·五刷东山·澳角乌礁湾灯塔断桥</a> · <a href="https://www.iesdouyin.com/share/video/7503867098389646650">抖音·天涯澳角攻略（海底溶洞）</a></p>
-    </div>
+    </details></div>
 
     <div class="spot">
       <div class="spot-head"><span class="badge b">B4</span><h3>南屿双面海／岐下村鱼骨沙洲</h3><span class="timechip">触发：仅适合早 6–9 点退潮窗口，本行程不安排</span></div>
       <p class="lead">中午出发、潮汐窗口不对，这两个点确定不去；留作清晨出发方案（按下方节奏走，全程约半天）。</p>
-      <div class="navline"><b>导航：</b>「南屿」（铜陵镇西南近海）→「岐下村」（鱼骨沙洲乘船点）。<b>衔接位置：</b>不参与本行程；如未来清晨出行，金銮湾日出 → 南屿 → 岐下村一条线顺路。</div>
+      <details class="dtl"><summary>导航 / 分步玩法 / 避坑 / 视频</summary><div class="navline"><b>导航：</b>「南屿」（铜陵镇西南近海）→「岐下村」（鱼骨沙洲乘船点）。<b>衔接位置：</b>不参与本行程；如未来清晨出行，金銮湾日出 → 南屿 → 岐下村一条线顺路。</div>
       <table>
         <colgroup><col class="col-step"><col class="col-do"><col class="col-time"></colgroup>
         <thead><tr><th>步骤</th><th>做什么（加粗为亮点）</th><th>参考时长</th></tr></thead>
@@ -485,7 +500,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
         <div class="note orange"><b>避坑：</b>涨潮禁登岛、勿在沙洲逗留到潮水上涨；鱼骨沙洲风大易晕船（备晕船药）；手机拍摄效果普通</div>
       </div>
       <p class="vidline">实景参考：<a href="https://www.iesdouyin.com/share/video/7344733957067476261">抖音·自驾游（含双面海退潮）</a> · <a href="https://www.iesdouyin.com/share/video/7353105831581191435">抖音·3 天 2 晚（含鱼骨沙洲）</a> · <a href="https://www.iesdouyin.com/share/video/7690199996554414547">抖音·潮汐核验示例</a></p>
-    </div>
+    </details></div>
   </div>
 </section>
 
@@ -508,11 +523,13 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
 <section id="verify">
   <div class="wrap">
     <span class="sec-tag">VERIFY</span>
-    <h2 class="sec-title">信息核验提示（核验于 2026 年 9 月）</h2>
-    <div class="verify">天气：出行当日以预报为准（9 月末参考：晴 26–32°C，紫外线强）。（来源：抖音天气核验示例帖）</div>
-    <div class="verify">潮汐：出行当日以潮汐表为准（双面海/鱼骨沙洲仅适早 6–9 点退潮窗口）。（来源：抖音潮汐核验示例帖）</div>
-    <div class="verify">车程：潮州 → 东山岛约 110km，高德实测 1h32–1h42；岛内点间转场时间见时间线。</div>
-    <div class="verify">票价与营业时间：风动石 45 元（线上约 42）、朝圣楼 15 元、小火车 30 元、电驴 20 元/2h 等，均为平台当前公开信息，出行前 1 天请再复查一次。</div>
+    <h2 class="sec-title">信息核验提示（路线核验于 2026 年 9 月）</h2>
+    <div class="verify">本页为<b>路线参考</b>，不是当日时刻表：以下信息会随季节、政策和商家经营变化，<b>出发前 1 天请逐项复核</b>。</div>
+    <div class="verify">天气与日落：以当日天气预报为准；9 月底日落约 18:00，之后逐月提前约 10–15 分钟，用天气 App 查当日日落时间，倒推 25 分钟到金銮湾。</div>
+    <div class="verify">潮汐：墨迹天气定位「东山岛」下拉可见当日低潮时间；金銮湾镜面需退潮后 2 小时内，双面海/鱼骨沙洲仅适早 6–9 点退潮窗口。</div>
+    <div class="verify">车程：潮州 → 东山岛约 110km，G15 沈海高速转 S64 东山支线出口，高德实测约 1.5h；单程高速费约 50–70 元（ETC 实扣）。</div>
+    <div class="verify">票价与营业时间：风动石 45 元（线上约 42）、朝圣楼 15 元、小火车 30 元、电驴 20 元/2h 等，均为 2026 年 9 月平台公开信息，出发前请再复查一次。</div>
+    <div class="verify">推荐餐厅：均来自 2026 年 9 月博主分享，可能已关门/迁址/调价，出发前用高德或大众点评搜店名确认营业。</div>
     <div class="verify">地图坐标：部分地点坐标为估算值，仅用于行程示意，导航以各点「导航」行为准。</div>
     <div class="verify">视频链接：均为抖音平台公开分享页；实景图片来自公开网络并保留水印来源。</div>
   </div>
@@ -569,8 +586,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
 
 <footer>
   <div class="wrap">
-    <span>东山岛一日游攻略 · 2026-09-28</span>
-    <span>信息核验于 2026 年 9 月 · 实景图/视频来源见各点标注</span>
+    <span>东山岛一日游攻略</span>
+    <span>路线核验于 2026 年 9 月 · 出行前请自行复核天气/日落/潮汐/票价 · 实景图/视频来源见各点标注</span>
   </div>
 </footer>
 
@@ -612,7 +629,5 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
   legend.addTo(map);
 })();
 </script>
-</body>
-</html>
 </body>
 </html>
