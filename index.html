@@ -159,14 +159,14 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     <span class="sec-tag">OVERVIEW</span>
     <h2 class="sec-title">行程速览</h2>
     <div class="notice"><b>使用说明：</b>本路线基于 2026 年 9 月底实地核验。天气、日落时间、潮汐、票价、停车政策与餐厅营业状态会随季节变化，<b>出发前 1 天请用天气 App（查日落与潮汐）和高德（查停车/餐厅营业）复核一次</b>。下午出发的一天行程时间偏紧，日落是硬锚点，前面环节超时就按文末「备选方案」压缩。</div>
-    <p class="sec-desc">中午饭后从潮州出发，从岛东北的铜陵镇开始一路向南串 4 站：顶街文公祠 → 苏峰山环岛路 → 金銮湾日落 → 铜陵夜市海鲜。蓝色为必去 A 档，橙色为有时间再去的 B 档。</p>
+    <p class="sec-desc">中午饭后从出发地出发，从岛东北的铜陵镇开始一路向南串 4 站：顶街文公祠 → 苏峰山环岛路 → 金銮湾日落 → 铜陵夜市海鲜。蓝色为必去 A 档，橙色为有时间再去的 B 档。</p>
     <div class="info-grid">
-      <div class="info-card"><div class="k">出发</div><div class="v">午饭后潮州出发<small>午饭在潮州解决后，约 13:00 上路</small></div></div>
-      <div class="info-card"><div class="k">车程</div><div class="v">约 1.5–2h<small>走 G15 沈海高速→S64 东山支线出口，约 110km</small></div></div>
+      <div class="info-card"><div class="k">出发</div><div class="v">午饭后出发<small>本次从潮州出发，午饭在潮州解决后约 13:00 上路；其他出发地请按日落倒推</small></div></div>
+      <div class="info-card"><div class="k">车程</div><div class="v">约 1.5–2h<small>从潮州走 G15 沈海高速→S64 东山支线出口，约 110km；其他出发地用高德重规划</small></div></div>
       <div class="info-card"><div class="k">天气</div><div class="v">出发前查当日<small>秋季海边昼夜温差大，带薄外套</small></div></div>
       <div class="info-card"><div class="k">日落</div><div class="v">日落前 25 分钟到位<small>9 月底约 18:00，之后每月提前 10–15 分钟，以天气 App 为准</small></div></div>
       <div class="info-card"><div class="k">潮汐</div><div class="v">墨迹天气定位东山岛<small>看当日低潮时间；镜面沙滩需退潮后 2 小时内</small></div></div>
-      <div class="info-card"><div class="k">预算</div><div class="v">人均约 230–330 元<small>2 人合计含油费高速、餐饮与机动额度</small></div></div>
+      <div class="info-card"><div class="k">预算</div><div class="v">人均约 230–330 元<small>2 人参考合计，含油费高速、餐饮与机动额度；人数变化按比例调整</small></div></div>
     </div>
     <div class="map-box">
       <div id="map"></div>
@@ -175,7 +175,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
 
     <h3 style="font-size:17px;font-weight:900;margin:22px 0 10px">当日时间线</h3>
     <div class="tl">
-      <div class="time">13:00</div><div class="axis"><span class="dot"></span></div><div class="body"><b>潮州出发</b><p>导航「南门湾停车场」，G15 沈海高速→S64 东山支线出口，约 110km</p></div>
+      <div class="time">13:00</div><div class="axis"><span class="dot"></span></div><div class="body"><b>出发地出发</b><p>导航「南门湾停车场」；从潮州走 G15 沈海高速→S64 东山支线出口，约 110km（其他出发地用高德重新规划）</p></div>
       <div class="time">14:30</div><div class="axis"><span class="dot"></span></div><div class="body"><b>抵岛 · 停车步行</b><p>南门湾停车场 10 元/天，步行 10–15 分钟进顶街</p></div>
       <div class="time">14:45–15:45</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A1 顶街＋文公祠观景台</b><p>大字墙·灯塔·涂鸦巷·左耳天台·南望天台</p></div>
       <div class="time">15:50–16:15</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A2 南门湾海堤</b><p>《左耳》取景地，彩色民居＋堤坝机位</p></div>
@@ -185,7 +185,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
       <div class="time">17:55 起</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A4 金銮湾／马銮湾日落</b><p>日落前到位（9 月底约 18:00）· 退潮期镜面倒影，日落后再留 10–15 分钟看晚霞</p></div>
       <div class="time">日落後 20 分钟</div><div class="axis"><span class="dot"></span></div><div class="body"><b>转场 · 夜市</b><p>车程约 20 分钟回铜陵镇</p></div>
       <div class="time">约 19:00–20:00</div><div class="axis"><span class="dot"></span></div><div class="body"><b>A5 铜陵夜市晚餐</b><p>海鲜排档＋古城老街小吃，丰俭由人，不卡点</p></div>
-      <div class="time">20:00–20:15</div><div class="axis"><span class="dot"></span></div><div class="body"><b>返程</b><p>约 21:30–22:00 到家；想多看一会儿夜景可推迟到 21:00 走</p></div>
+      <div class="time">20:00–20:15</div><div class="axis"><span class="dot"></span></div><div class="body"><b>返程</b><p>从东山岛返回出发地，约 21:30–22:00 到（潮州参考）；想多看一会儿夜景可推迟到 21:00 走</p></div>
     </div>
   </div>
 </section>
@@ -205,7 +205,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
           <tr><td rowspan="4" style="vertical-align:top"><b>证件设备</b></td><td>身份证＋驾驶证</td><td>自驾必备</td></tr>
           <tr><td>手机＋车载充电器/数据线</td><td>全程导航耗电快</td></tr>
           <tr><td>充电宝</td><td>拍照＋骑行一天</td></tr>
-          <tr><td>离线地图</td><td>高德提前缓存潮州→东山岛及岛内各点，防信号弱</td></tr>
+          <tr><td>离线地图</td><td>高德提前缓存出发地→东山岛及岛内各点，防信号弱</td></tr>
           <tr><td rowspan="4" style="vertical-align:top"><b>防晒装备</b></td><td>防晒霜 SPF50+</td><td>出门前涂，午后补涂一次</td></tr>
           <tr><td>遮阳帽/渔夫帽</td><td>顶街、海堤无遮阴</td></tr>
           <tr><td>墨镜</td><td>海边强光</td></tr>
@@ -226,7 +226,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
           <tr><td rowspan="3" style="vertical-align:top"><b>饮食</b></td><td>大容量水杯或瓶装水 2 瓶/人</td><td>日晒补水</td></tr>
           <tr><td>少量零食/干粮</td><td>转场路上垫饥</td></tr>
           <tr><td>薄荷糖/口香糖</td><td>开车提神</td></tr>
-          <tr><td rowspan="6" style="vertical-align:top"><b>车辆杂项</b></td><td>加满油/查续航</td><td>往返约 220km＋岛上行驶</td></tr>
+          <tr><td rowspan="6" style="vertical-align:top"><b>车辆杂项</b></td><td>加满油/查续航</td><td>从潮州往返约 220km＋岛上行驶（其他出发地按实际里程调整）</td></tr>
           <tr><td>玻璃水、行车记录仪确认</td><td>出发前检查</td></tr>
           <tr><td>手机支架</td><td>车上导航</td></tr>
           <tr><td>少量现金</td><td>备停车场/小摊用</td></tr>
@@ -248,17 +248,17 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
       </ul>
       <h3 style="font-size:17px;font-weight:900;margin:16px 0 8px">导航、停车与岛内交通</h3>
       <ul style="margin:6px 0 0 20px;font-size:13.5px">
-        <li style="margin:5px 0"><b>高速路线：</b>潮州上 G15 沈海高速往汕头/诏安方向 → 竹港枢纽转 <b>S64 东山支线</b> → 「东山岛/陈城」出口下（以实际路牌为准），全程约 110km，单程高速费约 50–70 元（ETC 实扣为准），上岛无额外桥费</li>
+        <li style="margin:5px 0"><b>高速路线（从潮州出发参考）：</b>潮州上 G15 沈海高速往汕头/诏安方向 → 竹港枢纽转 <b>S64 东山支线</b> → 「东山岛/陈城」出口下（以实际路牌为准），全程约 110km，单程高速费约 50–70 元（ETC 实扣为准），上岛无额外桥费；<b>其他出发地请用高德重新规划路线</b></li>
         <li style="margin:5px 0"><b>岛上导航：</b>第一站直接导「南门湾停车场」（铜陵镇）；之后各点用高德搜「顶街」「苏峰山环岛路」「金銮湾」即可</li>
         <li style="margin:5px 0"><b>停车：</b>南门湾公共停车场小车 10 元/天</li>
         <li style="margin:5px 0"><b>岛内移动：</b>苏峰山环岛路旺季白天私家车禁上，租电动车（约 40 元/天）最灵活；不骑车可选景区观光车</li>
       </ul>
-      <h3 style="font-size:17px;font-weight:900;margin:16px 0 8px">预算分项估算（2 人）</h3>
+      <h3 style="font-size:17px;font-weight:900;margin:16px 0 8px">预算分项估算（2 人参考）</h3>
       <table>
         <colgroup><col style="width:22%"><col style="width:20%"><col style="width:58%"></colgroup>
         <thead><tr><th>分项</th><th>估算金额</th><th>说明</th></tr></thead>
         <tbody>
-          <tr><td>交通（油费＋高速）</td><td>约 180–260 元</td><td>往返约 220km，含路桥，估算</td></tr>
+          <tr><td>交通（油费＋高速）</td><td>约 180–260 元</td><td>从潮州往返约 220km，含路桥（其他出发地按实际里程调整）</td></tr>
           <tr><td>门票</td><td>10 元起</td><td>文公祠观景平台免费（部分私人天台 5–10 元，现场为准）；风动石 45 元/人（线上约 42，可选）</td></tr>
           <tr><td>岛内交通</td><td>0–40 元</td><td>电驴 40 元/天（1 辆）或观光车</td></tr>
           <tr><td>餐饮</td><td>约 200–260 元</td><td>顶街小吃＋咖啡约 60–100；海鲜晚餐 120–160</td></tr>
@@ -515,7 +515,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:6px 16px;justify-content:space-betw
     <div class="alt-grid">
       <div class="alt"><b>超时压缩顺序</b><p>任何环节超时，按「顶街 → 南门湾 → 马銮湾」逐级压缩；再不够，苏峰山限 40 分钟、夜市晚餐缩短。</p></div>
       <div class="alt"><b>加项组合</b><p>顶街逛得快 + 时间提前：加风动石（B1）；日落前有富余：加彩蝶湾（B2）；苏峰山后仍早：澳角二选一（B3）。</p></div>
-      <div class="alt"><b>下次清晨方案</b><p>金銮湾日出 → 南屿双面海 → 岐下村鱼骨沙洲，全程约半天，需 5:30 前从潮州出发。</p></div>
+      <div class="alt"><b>下次清晨方案</b><p>金銮湾日出 → 南屿双面海 → 岐下村鱼骨沙洲，全程约半天，需 5:30 前从出发地出发（潮州参考）。</p></div>
       <div class="alt"><b>雨天/高温兜底</b><p>改走室内线：风动石景区、朝圣楼、顶街咖啡馆、铜陵老街小吃、关帝庙；或整体顺延一周。</p></div>
     </div>
   </div>
